@@ -1,0 +1,91 @@
+
+<div class="jumbtron">
+    <h1 class="display-4 text-center">Employee Detail Register!!</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-5">
+            <form>
+                <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-white">
+                                    <i class="fas fa-user-circle" [class.green-icon]="name.valid" [class.red-icon]="name.invalid && name.touched"></i>
+                                </div>
+                            </div>
+                            <input type="text" name="employeeId" ng-model="employeeId" class="form-control"
+                                placeholder="Employee ID" disabled>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle" [class.green-icon]="name.valid" [class.red-icon]="name.invalid && name.touched"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="name" ng-model="name" class="form-control"
+                            placeholder="Employee Full Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
+                        </div> 
+                        </div>
+                        <input type="text" name="address"  ng-model="address" 
+                        class="form-control" placeholder="Employee Address" required maxlength="40">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
+                        </div>
+                        <input type="text" name="companyName" ng-model="companyName"
+                        class="form-control" placeholder="Employee Company Name" required maxlength="100">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle"  [class.green-icon]="designation.valid" [class.red-icon]="designation.invalid && designation.touched"></i>
+                        </div>
+                        </div>
+                        <input type="text" name="designation" ng-model="designation" 
+                        class="form-control" placeholder="Designation of employee" required maxlength="100">
+                    </div>
+                </div>
+                     
+                      <div class="form-group">
+                        <button class="btn btn-success btn-lg btn-block" ng-click="saveData()" ng-if="!form"><i class="fas fa-database"></i> {{btnText}}</button>
+                      </div>
+            </form>
+        </div>
+        <div class="col-md-7">
+            <table class="table table-hover">
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Employee Address</th>
+                    <th>Employee Company</th>
+                    <th>Employee Designation</th>
+                </tr>      
+                <tr ng-repeat="emp in Employees">
+                    <td ng-click="populateForm(emp)">{{emp.employeeId}}</td>
+                    <td ng-click="populateForm(emp)">{{emp.name}}</td>
+                    <td ng-click="populateForm(emp)">{{emp.address}}</td>
+                    <td ng-click="populateForm(emp)">{{emp.companyName}}</td>
+                    <td ng-click="populateForm(emp)">{{emp.designation}}</td>
+                    <td>
+                        <i class="far fa-trash-alt fa-lg text-danger" ng-click ="onDelete(emp.employeeId)"></i>
+                    </td>
+                </tr>
+            </table>      
+        </div>
+    </div>
+</div>
