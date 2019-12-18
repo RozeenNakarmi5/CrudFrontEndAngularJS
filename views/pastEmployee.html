@@ -1,0 +1,57 @@
+<div class="col-md-7">
+    <table class="table table-hover">
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Employee Address</th>
+            <th>Employee Designation</th>
+        </tr>      
+        <tr ng-repeat="emp in Employees">
+            <td>{{emp.employeeID}}</td>
+            <td>{{emp.firstName}}</td>
+            <td>{{emp.address}}</td>
+            <td>{{emp.designation}}</td>
+            <td>
+                <i class="fas fa-edit text-danger" ng-click ="addUsers(emp.employeeID)"></i>
+            </td>
+        </tr>
+    </table>      
+</div>
+<modal visible="showModal">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <input type="text" name="userNamex" ng-model="mainArr.userNamex" class="form-control"
+                placeholder="Employee UserName" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa fa-key	"></i>
+                </div>
+            </div>
+            <input type="text" name="passwordx" ng-model="mainArr.passwordx" class="form-control"
+                placeholder="Employee password" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa fa-key	"></i>
+                </div>
+            </div>
+            <input type="text" name="rolex" ng-model="mainArr.rolex" class="form-control"
+                placeholder="Employee role" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" ng-click="saveUserData()" ng-if="!form"><i class="fas fa-database"></i> Save</button>
+      </div>
+</modal>

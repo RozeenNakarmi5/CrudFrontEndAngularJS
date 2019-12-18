@@ -1,8 +1,8 @@
 angular.module("homeCtrlModule", ['employeeService'])
-.controller("HomeCtrl",["$scope","crudService","$log", function($scope,crudService,$log){
+.controller("HomeCtrl",["$scope","currentEmployeeService","$log", function($scope,currentEmployeeService,$log){
     countEmployees();
     function countEmployees(){
-        var promiseGet = crudService.countEmployees();
+        var promiseGet = currentEmployeeService.countEmployees();
         promiseGet.then(function (pl){$scope.EmployeesCount = pl.data},
         function (errorPl)
         {

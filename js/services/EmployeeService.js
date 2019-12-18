@@ -1,5 +1,5 @@
 angular.module('employeeService', [])
-.service ('crudService', function($http)
+.service ('currentEmployeeService', function($http)
 {
     var apiUrl = "http://localhost:8812/api/employee/";
     this.getEmployees = function()
@@ -22,5 +22,26 @@ angular.module('employeeService', [])
     {
         return $http.put(apiUrl + empID,employeeData)
     }
-});
+    this.updateRoles = function (empID, roleID)
+    {
+        return $http.put(apiUrl + "UpdateRole/" + empID,roleID)
+    }
+    this.updateDepartments = function(empID, departmentInfo)
+    {
+        return $http.put(apiUrl + "UpdateDepartment/" + empID,departmentInfo)
+    } 
+    
+})
+.service ('pastEmployeeService', function($http)
+{
+    var apiUrl = "http://localhost:8812/api/employee/";
+    this.getPastEmployees = function()
+    {
+        return $http.get(apiUrl + "/GetNotWorkingEmployee");
+    }
+    this.addUsers = function(id,loginData)
+    {
+        return $http.put(apiUrl + "AddUsers/" + id,loginData)
+    }
+})
 
