@@ -1,23 +1,6 @@
 var app= angular.module('employeeApp', ["employeeCtrlModule","popupModule","homeCtrlModule","ui.router"
-,"ngTouch", "ngAnimate", "ui.bootstrap"]);
-// app.config(['$routeProvider',function($routeProvider){
-//     $routeProvider
-//         .when("/",{
-//             templateUrl:"views/home.html",
-//             controller:"HomeCtrl"
-//         })
-//         .when("/Employee",{
-//             templateUrl:"views/employeeCrud.html",
-//         })
-//         .when("/Employee/PastEmployee", {
-//             templateUrl:"views/pastEmployee.html",
-//             controller: "NotWorkingEmployeeCtrl"
-//         })
-//         .when("/Employee/CurrentEmployee",{
-//             templateUrl:"views/currentEmployee.html",
-//             controller: "EmployeeCtrl"
-//         })
-// }])
+,"ngTouch", "ngAnimate", "ui.bootstrap", "projectCtrlModule"]);
+
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider,$urlRouterProvider)
     {
@@ -41,6 +24,22 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl:"views/pastEmployee.html",
             controller: "NotWorkingEmployeeCtrl"
         })
+        .state('project',{
+            url: "/Project",
+            templateUrl:"views/Projects/ProjectHome.html"
+
+        })
+        .state('project.current',{
+            url: "/CurrentProject",
+            templateUrl:"views/Projects/currentProjects.html",
+            controller :"projectCtrl"
+        })
+        .state('project.scrap',{
+            url: "/GetScrap",
+            templateUrl:"views/Projects/scrapProjects.html",
+            controller :"scrapCtrl"
+        })
+        
         $urlRouterProvider.otherwise('/');
     }
 

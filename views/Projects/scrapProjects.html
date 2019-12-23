@@ -1,0 +1,30 @@
+<div class="col-md-12">
+    <table class="table table-hover">
+        <tr>
+            <th>ProjectID</th>
+            <th>Project Name</th>
+            <th>Project Description</th>
+            <th>Project Start Date</th>
+            <th>Project End Date</th>
+            <th>Restore</th>
+
+        </tr>
+        <tr ng-repeat="p in p">
+            <td>{{p.projectID}}</td>
+            <td>{{p.projectName}}</td>
+            <td>{{p.projectDescription}}</td>
+            <td>{{p.projectStartDate}}</td>
+            <td>{{p.projectEndDate}}</td>
+            <td>
+                <i class="fas fa-plus" ng-click ="restore(p.projectID)"></i>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+<modal visible="restoreProjectModal">
+    <h1>Are you sure you want to restore this?</h1>
+        <button class="btn btn-primary"  ng-click ="restoreProject()">Yes</button>
+        <button class="btn btn-secondary" ng-click ="restore()" text ="No">No</button>    
+</modal>

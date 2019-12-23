@@ -2,16 +2,17 @@
     <div class="col-md-5">
         <form>
             <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text bg-white">
-                                <i class="fas fa-user-circle" [class.green-icon]="name.valid" [class.red-icon]="name.invalid && name.touched"></i>
-                            </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="name.valid"
+                                [class.red-icon]="name.invalid && name.touched"></i>
                         </div>
-                        <input type="text" name="employeeID" ng-model="employeeID" class="form-control"
-                            placeholder="Employee ID" disabled>
                     </div>
+                    <input type="text" name="employeeID" ng-model="employeeID" class="form-control"
+                        placeholder="Employee ID" disabled>
                 </div>
+            </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -24,153 +25,165 @@
                 </div>
             </div>
             <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text bg-white">
-                                <i class="fas fa-user-circle"></i>
-                            </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle"></i>
                         </div>
-                        <input type="text" name="lastName" ng-model="lastName" class="form-control"
-                            placeholder="Employee Last Name" required>
                     </div>
-                </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
-                    </div> 
-                    </div>
-                    <input type="text" name="address"  ng-model="address" 
-                    class="form-control" placeholder="Employee Address" required maxlength="40">
+                    <input type="text" name="lastName" ng-model="lastName" class="form-control"
+                        placeholder="Employee Last Name" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
-                    </div> 
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-credit-card" [class.green-icon]="address.valid"
+                                [class.red-icon]="address.invalid && address.touched"></i>
+                        </div>
                     </div>
-                    <input type="text" name="email"  ng-model="email" 
-                    class="form-control" placeholder="Employee email">
+                    <input type="text" name="address" ng-model="address" class="form-control"
+                        placeholder="Employee Address" required maxlength="40">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
-                    </div> 
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-credit-card" [class.green-icon]="address.valid"
+                                [class.red-icon]="address.invalid && address.touched"></i>
+                        </div>
                     </div>
-                    <input type="text" name="contactNumber"  ng-model="contactNumber" 
-                    class="form-control" placeholder="Employee Contact Number">
+                    <input type="text" name="email" ng-model="email" class="form-control" placeholder="Employee email">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
-                    </div> 
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-credit-card" [class.green-icon]="address.valid"
+                                [class.red-icon]="address.invalid && address.touched"></i>
+                        </div>
                     </div>
-                    <input type="text" name="emergencyContactNumber"  ng-model="emergencyContactNumber" 
-                    class="form-control" placeholder="Employee Emergency Contact Number">
+                    <input type="text" name="contactNumber" ng-model="contactNumber" class="form-control"
+                        placeholder="Employee Contact Number">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
-                    </div> 
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-credit-card" [class.green-icon]="address.valid"
+                                [class.red-icon]="address.invalid && address.touched"></i>
+                        </div>
                     </div>
-                    <input type="text" name="profilePicture"  ng-model="profilePicture" 
-                    class="form-control" placeholder="Employee Profile Picture">
+                    <input type="text" name="emergencyContactNumber" ng-model="emergencyContactNumber"
+                        class="form-control" placeholder="Employee Emergency Contact Number">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="designation.valid" [class.red-icon]="designation.invalid && designation.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-credit-card" [class.green-icon]="address.valid"
+                                [class.red-icon]="address.invalid && address.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="designation" ng-model="designation" 
-                    class="form-control" placeholder="Designation of employee" required maxlength="100">
+                    <input type="text" name="profilePicture" ng-model="profilePicture" class="form-control"
+                        placeholder="Employee Profile Picture">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="designation.valid"
+                                [class.red-icon]="designation.invalid && designation.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="salary" ng-model="salary"
-                    class="form-control" placeholder="Employee salary" required>
+                    <input type="text" name="designation" ng-model="designation" class="form-control"
+                        placeholder="Designation of employee" required maxlength="100">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="companyName.valid"
+                                [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="isFullTimer" ng-model="isFullTimer"
-                    class="form-control" placeholder="Full Timer" required>
+                    <input type="text" name="salary" ng-model="salary" class="form-control"
+                        placeholder="Employee salary" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="companyName.valid"
+                                [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="userName" ng-model="userName"
-                    class="form-control" placeholder="User Name" required>
+                    <input type="text" name="isFullTimer" ng-model="isFullTimer" class="form-control"
+                        placeholder="Full Timer" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="companyName.valid"
+                                [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="password" ng-model="password"
-                    class="form-control" placeholder="password" required>
+                    <input type="text" name="userName" ng-model="userName" class="form-control" placeholder="User Name"
+                        required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="companyName.valid"
+                                [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="roleID" ng-model="roleID"
-                    class="form-control" placeholder="roleID" required>
+                    <input type="text" name="password" ng-model="password" class="form-control" placeholder="password"
+                        required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                    <div class="input-group-text bg-white">
-                        <i class="fas fa-user-circle"  [class.green-icon]="companyName.valid" [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="companyName.valid"
+                                [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
                     </div>
-                    </div>
-                    <input type="text" name="departmentID" ng-model="departmentID"
-                    class="form-control" placeholder="departmentID" required>
+                    <input type="text" name="roleID" ng-model="roleID" class="form-control" placeholder="roleID"
+                        required>
                 </div>
             </div>
-            
-                 
-                  <div class="form-group">
-                    <button class="btn btn-success btn-lg btn-block" ng-click="saveData()" ng-if="!form"><i class="fas fa-database"></i> {{btnText}}</button>
-                  </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="fas fa-user-circle" [class.green-icon]="companyName.valid"
+                                [class.red-icon]="companyName.invalid && companyName.touched"></i>
+                        </div>
+                    </div>
+                    <input type="text" name="departmentID" ng-model="departmentID" class="form-control"
+                        placeholder="departmentID" required>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-success btn-lg btn-block" ng-click="saveData()" ng-if="!form"><i
+                        class="fas fa-database"></i> {{btnText}}</button>
+            </div>
         </form>
     </div>
     <div class="col-md-7">
@@ -181,7 +194,7 @@
                 <th>Employee Address</th>
                 <!-- <th>Employee Company</th> -->
                 <th>Employee Designation</th>
-            </tr>      
+            </tr>
             <tr ng-repeat="emp in Employees">
                 <td ng-click="populateForm(emp)">{{emp.employeeID}}</td>
                 <td ng-click="populateForm(emp)">{{emp.firstName}}</td>
@@ -192,19 +205,25 @@
                     <table>
                         <tr>
                             <td>
-                                <i class="far fa-trash-alt fa-lg text-danger" ng-click ="onDelete(emp.employeeID)"></i>
+                                <i class="far fa-trash-alt fa-lg text-danger" ng-click="onDelete(emp.employeeID)"></i>
                             </td>
                             <td>
-                                <i class="fas fa-user-tag" ng-click = "onUpdateRole(emp.employeeID)"></i>
-                                
+                                <i class="fas fa-user-tag" ng-click="onUpdateRole(emp.employeeID)"></i>
+
                             </td>
                             <td>
-                                <i class="fa fa-building-o" aria-hidden="true" ng-click = "onUpdateDepartment(emp.employeeID)"></i>
+                                <i class="fa fa-building-o" aria-hidden="true"
+                                    ng-click="onUpdateDepartment(emp.employeeID)"></i>
+                            </td>
+                            <td>
+                                <i class="fa fa-building-o" aria-hidden="true"
+                                    ng-click="onUpdateDepartment(emp.employeeID)"></i>
+                            </td>
                         </tr>
                     </table>
                 </td>
             </tr>
-        </table>    
+        </table>
     </div>
     <hr />
 </div>
@@ -212,19 +231,20 @@
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-prepend">
-            <div class="input-group-text bg-white">
-                <i class="fas fa-user-circle"></i>
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle"></i>
+                </div>
             </div>
-            </div>
-            <input type="text" name="updatingRoles.roleID" ng-model="updatingRoles.roleID"
-            class="form-control" placeholder="Role ID" required>
+            <input type="text" name="updatingRoles.roleID" ng-model="updatingRoles.roleID" class="form-control"
+                placeholder="Role ID" required>
         </div>
     </div>
     <div class="form-group">
-        <button class="btn btn-success btn-lg btn-block" ng-click="saveUpdatedRolesRecord()" ng-if="!form"><i class="fas fa-database"></i> {{btnText}}</button>
+        <button class="btn btn-success btn-lg btn-block" ng-click="saveUpdatedRolesRecord()" ng-if="!form"><i
+                class="fas fa-database"></i> {{btnText}}</button>
     </div>
-</modal>  
+</modal>
 <modal visible="addDepartmentModal">
     <h1>Hari om namanamanama</h1>
-    </modal>
+</modal>
 </td>

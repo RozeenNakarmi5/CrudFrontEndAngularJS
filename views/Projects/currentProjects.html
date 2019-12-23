@@ -1,0 +1,193 @@
+<div>
+    <div>
+        
+        <button class="btn btn-primary" ng-click="addNewProject()"> <i class="fas fa-user-plus"></i> Add new project</button>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <tr>
+                <th>ProjectID</th>
+                <th>Project Name</th>
+                <th>Project Description</th>
+                <th>Project Start Date</th>
+                <th>Project End Date</th>
+                <th>Delete</th>
+            </tr>
+            <tr ng-repeat="proj in project">
+                <td ng-click="editProject(proj)">{{proj.projectID}}</td>
+                <td ng-click="editProject(proj)"> {{proj.projectName}}</td>
+                <td ng-click="editProject(proj)">{{proj.projectDescription}}</td>
+                <td ng-click="editProject(proj)">{{proj.projectStartDate}}</td>
+                <td ng-click="editProject(proj)">{{proj.projectEndDate}}</td>
+
+                <td>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <i class="far fa-trash-alt fa-lg text-danger" ng-click="delete(proj.projectID)"></i>
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<modal visible="addProjectModal">
+    <div class="row1">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle" [class.green-icon]="name.valid"
+                                    [class.red-icon]="name.invalid && name.touched"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="ProjectID" ng-model="ProjectID" class="form-control"
+                            placeholder="Project ID" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="ProjectName" ng-model="projectName" class="form-control"
+                            placeholder="Project Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="ProjectDesc" ng-model="projectDesc" class="form-control"
+                            placeholder="Project Description" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="datetime-local" name="ProjectSD" ng-model="projectSD" class="form-control"
+                            placeholder="Project Start Date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="datetime-local" name="ProjectED" ng-model="projectED" class="form-control"
+                            placeholder="Project End Date" required>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <button class="btn btn-success btn-lg btn-block" ng-click="saveData()" ng-if="!form"><i
+                            class="fas fa-database"></i> Save </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</modal>
+<modal visible="editProjectModal">
+    <div class="row2">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle" [class.green-icon]="name.valid"
+                                    [class.red-icon]="name.invalid && name.touched"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="edit.projectID" ng-model="edit.projectID" class="form-control"
+                            placeholder="Project ID" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="edit.projectName" ng-model="edit.projectName" class="form-control"
+                            placeholder="Project Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="edit.projectDesc" ng-model="edit.projectDesc" class="form-control"
+                            placeholder="Project Description" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="edit.projectSD" ng-model="edit.projectSD" class="form-control"
+                            placeholder="Project Start Date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <input type="text" name="edit.projectED" ng-model="edit.projectED" class="form-control"
+                            placeholder="Project End Date" required>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <button class="btn btn-success btn-lg btn-block" ng-click="updateProject()" ng-if="!form"><i
+                            class="fas fa-database"></i> Update </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</modal>
+
+<modal visible="deleteProjectModal">
+    <h1>Are you sure you want to delete this?</h1>
+    <button class="btn btn-primary" ng-click="deleteProject()">Yes</button>
+    <button class="btn btn-secondary" ng-click="delete()" text="No">No</button>
+
+</modal>

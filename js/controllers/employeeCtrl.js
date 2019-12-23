@@ -7,6 +7,7 @@ angular.module("employeeCtrlModule", ['employeeService'])
     $scope.addDepartmentModal = false;
 
     loadRecords ();
+
     clear();
     function loadRecords (){
         var promiseGet = currentEmployeeService.getEmployees();
@@ -16,6 +17,8 @@ angular.module("employeeCtrlModule", ['employeeService'])
             $log.error('failure loading Employee', errorPl);
         });
     }
+
+    
     function clear(){
         $scope.employeeID = 0;
         $scope.firstName = "";
@@ -32,7 +35,10 @@ angular.module("employeeCtrlModule", ['employeeService'])
         $scope.password = "";
         $scope.departmentID = "";
     }
+
     $scope.populateForm = function(empData){
+        $scope.titleHeader = "Edit Employee" + empData.firstName;
+        $scope.editModal = !$scope.editModal;
         $scope.employeeID = empData.employeeID ;
         // $scope.firstName = empData.firstName;
         // $scope.address = empData.address ;
@@ -41,6 +47,7 @@ angular.module("employeeCtrlModule", ['employeeService'])
         $scope.designation = empData.designation;
         $scope.btnText= "Update";
     }
+
     $scope.saveData = function()
     {
         var employee = {
@@ -107,6 +114,8 @@ angular.module("employeeCtrlModule", ['employeeService'])
         });
  
     }
+
+
     $scope.onUpdateRole = function(empdID)
     {
         $scope.updatingRoles= {};
@@ -132,6 +141,8 @@ angular.module("employeeCtrlModule", ['employeeService'])
         $scope.addDepartmentModal = !$scope.addDepartmentModal;
     }
 }])
+
+
 //Not working employee controller
 .controller("NotWorkingEmployeeCtrl",["$scope","pastEmployeeService","$log",'$uibModal',
 function ($scope,pastEmployeeService,$log, $uibModal){
