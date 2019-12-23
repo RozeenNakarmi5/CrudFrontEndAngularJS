@@ -10,7 +10,6 @@ angular.module("employeeCtrlModule", ['employeeService'])
     $scope.assignProjectToEmployee = false;
 
     loadRecords ();
-
     function loadRecords (){
         var promiseGet = currentEmployeeService.getEmployees();
         promiseGet.then(function (pl){$scope.Employees = pl.data},
@@ -19,8 +18,8 @@ angular.module("employeeCtrlModule", ['employeeService'])
             $log.error('failure loading Employee', errorPl);
         });
     }
+
     $scope.populateForm = function(empData){
-        
         $scope.updateEmployee = {};
         $scope.titleHeader = "Update Employee";
         $scope.btnText = "Update";
@@ -102,6 +101,8 @@ angular.module("employeeCtrlModule", ['employeeService'])
         });
  
     }
+
+
     $scope.onUpdateRole = function(empdID)
     {
         $scope.updatingRoles= {};
@@ -150,6 +151,8 @@ angular.module("employeeCtrlModule", ['employeeService'])
 
     }
 }])
+
+
 //Not working employee controller
 .controller("NotWorkingEmployeeCtrl",["$scope","pastEmployeeService","$log",'$uibModal',
 function ($scope,pastEmployeeService,$log, $uibModal){

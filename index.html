@@ -10,6 +10,8 @@
         <script src="js/controllers/employeeCtrl.js"></script>
         <script src="js/services/EmployeeService.js"></script>
         <script src="js/services/DepartmentService.js"></script>
+		<script src="js/services/ProjectService.js"></script>
+  		<script src="js/controllers/projectCtrl.js"></script>
         <script src="js/controllers/homeCtrl.js"></script>
         <script src="js/controllers/popupModal.js"></script>
         <script src="js/controllers/departmentCtrl.js"></script>
@@ -43,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" ui-sref="department">Department</a>
                     </li>
+					<li class="nav-item">
+                    	<a class="nav-link" ui-sref="project">Project</a>
+                	</li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                     </form>
@@ -52,6 +57,12 @@
             <div ui-view>
             </div>
         </div>
-        
-    </body>
+    </nav>
+    <div class="container">
+        <div ui-view>
+        </div>
+    </div>
+
+</body>
+
 </html>

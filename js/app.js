@@ -1,5 +1,5 @@
 var app= angular.module('employeeApp', ["employeeCtrlModule","popupModule","homeCtrlModule","ui.router"
-,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule"]);
+,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule"]);
 // app.config(['$routeProvider',function($routeProvider){
 //     $routeProvider
 //         .when("/",{
@@ -46,6 +46,22 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: "views/department.html",
             controller: "DepartmentCtrl"
         })
+		.state('project',{
+            url: "/Project",
+            templateUrl:"views/Projects/ProjectHome.html"
+
+        })
+        .state('project.current',{
+            url: "/CurrentProject",
+            templateUrl:"views/Projects/currentProjects.html",
+            controller :"projectCtrl"
+        })
+        .state('project.scrap',{
+            url: "/GetScrap",
+            templateUrl:"views/Projects/scrapProjects.html",
+            controller :"scrapCtrl"
+        })
+        
         $urlRouterProvider.otherwise('/');
     }
 
