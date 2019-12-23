@@ -5,9 +5,12 @@ angular.module("employeeCtrlModule", ['employeeService'])
     $scope.employeeId = 0;
     $scope.showModal = false;
     $scope.addDepartmentModal = false;
+    $scope.addNewEmployee= false;
+    $scope.editEmployee=false;
+    $scope.assignProjectToEmployee = false;
 
     loadRecords ();
-    clear();
+
     function loadRecords (){
         var promiseGet = currentEmployeeService.getEmployees();
         promiseGet.then(function (pl){$scope.Employees = pl.data},
@@ -16,76 +19,70 @@ angular.module("employeeCtrlModule", ['employeeService'])
             $log.error('failure loading Employee', errorPl);
         });
     }
-    function clear(){
-        $scope.employeeID = 0;
-        $scope.firstName = "";
-        $scope.lastName = "";
-        $scope.address = "";
-        $scope.email= "";
-        $scope.contactNumber = "";
-        $scope.emergencyContactNumber = "";
-        $scope.profilePicture = "";
-        $scope.designation = "";
-        $scope.salary = "";
-        $scope.isFullTimer = "";
-        $scope.userName = "";
-        $scope.password = "";
-        $scope.departmentID = "";
-    }
     $scope.populateForm = function(empData){
-        $scope.employeeID = empData.employeeID ;
-        // $scope.firstName = empData.firstName;
-        // $scope.address = empData.address ;
-        $scope.isFullTimer = empData.isFullTimer;
-        $scope.salary = empData.salary;
-        $scope.designation = empData.designation;
-        $scope.btnText= "Update";
-    }
-    $scope.saveData = function()
-    {
-        var employee = {
-            employeeID : $scope.employeeID,
-            firstName :  $scope.firstName,
-            lastName :  $scope.lastName,
-            address : $scope.address,
-            email :  $scope.email,
-            contactNumber: $scope.contactNumber,
-            emergencyContactNumber: $scope.emergencyContactNumber,
-            profilePicture : $scope.profilePicture,
-            designation: $scope.designation,
-            salary: $scope.salary,
-            isFullTimer: $scope.isFullTimer,
-            userName : $scope.userName,
-            password : $scope.password,
-            roleID : $scope.roleID,
-            departmentID: $scope.departmentID
-        }
-        if ($scope.btnText == "Save")
-        {
-            var addEmployees = currentEmployeeService.postEmployees(employee);
-            addEmployees.then(function() {
-                    alert("Data save Successfully");
-                    loadRecords ();
-                    clear();
-            },function(error){
-                console.log("Error: "+ error)
-            });
-        }
-        if ($scope.btnText == "Update")
-        {
+        
+        $scope.updateEmployee = {};
+        $scope.titleHeader = "Update Employee";
+        $scope.btnText = "Update";
+        $scope.editEmployee= !$scope.editEmployee;
+        $scope.updateEmployee.employeeID = empData.employeeID ;
+        $scope.updateEmployee.isFullTimer = empData.isFullTimer;
+        $scope.updateEmployee.salary = empData.salary;
+        $scope.updateEmployee.designation = empData.designation;
+        $scope.updateEmployee.updateEmployeeData = function() {
+            var employee = {
+                employeeID : $scope.updateEmployee.employeeID,
+                designation : $scope.updateEmployee.designation,
+                salary : $scope.updateEmployee.salary,
+                isFullTimer : $scope.updateEmployee.isFullTimer
+            };
             var updateEmployee = currentEmployeeService.updateEmployees(employee.employeeID,employee);
             updateEmployee.then(function (){
-                
+
                 alert("Data Updated Successfully");
                 loadRecords ();
-                clear();
+                $scope.editEmployee= false;
 
             },function(error){
                 console.log("Error: "+ error)
             });
         }
+
     }
-    
+    $scope.btnAddNewEmployee = function()
+    {
+        $scope.insertEmployee = {};
+        $scope.titleHeader = "Add Employee";
+        $scope.addNewEmployee= !$scope.addNewEmployee;
+        $scope.insertEmployee.saveEmployeeData = function()
+        {
+            var employees = {
+                firstName :  $scope.insertEmployee.firstName,
+                lastName :  $scope.insertEmployee.lastName,
+                address : $scope.insertEmployee.address,
+                email :  $scope.insertEmployee.email,
+                contactNumber: $scope.insertEmployee.contactNumber,
+                emergencyContactNumber: $scope.insertEmployee.emergencyContactNumber,
+                profilePicture : $scope.insertEmployee.profilePicture,
+                designation: $scope.insertEmployee.designation,
+                salary: $scope.insertEmployee.salary,
+                isFullTimer: $scope.insertEmployee.isFullTimer,
+                userName : $scope.insertEmployee.userName,
+                password : $scope.insertEmployee.password,
+                roleID : $scope.insertEmployee.roleID,
+                departmentID: $scope.insertEmployee.departmentID
+            }
+            var addEmployees = currentEmployeeService.postEmployees(employees);
+            addEmployees.then(function() {
+                    alert("Data save Successfully");
+                    loadRecords ();
+            },function(error){
+                console.log("Error: "+ error)
+            });
+        }
+
+    }
+
     $scope.onDelete = function(employeeID){
         var deletedEmployee = currentEmployeeService.deleteEmployees(employeeID);
         deletedEmployee.then(function (response)
@@ -94,8 +91,6 @@ angular.module("employeeCtrlModule", ['employeeService'])
             {
                 alert("Data Delete Successfully");
                 loadRecords ();
-                clear();
-
             }
             else
             {
@@ -129,7 +124,30 @@ angular.module("employeeCtrlModule", ['employeeService'])
     }
     $scope.onUpdateDepartment = function(empID)
     {
+        $scope.updatingDepartment= {};
+        $scope.titleHeader = "Update Department";
+        $scope.updatingDepartment.departmentID="";
         $scope.addDepartmentModal = !$scope.addDepartmentModal;
+        $scope.saveUpdatedDepartmentRecord = function ()
+        {
+            var updateEmployeesDepartment = {
+                employeeID : empID,
+                departmentID : $scope.updatingDepartment.departmentID
+            }
+            var updateDepartment = currentEmployeeService.updateDepartments(empID,updateEmployeesDepartment);
+            updateDepartment.then(function(){
+                alert("Updated department successfully");
+                loadRecords ();
+                $scope.addDepartmentModal = false;
+            });
+        }
+    }
+    $scope.addProject = function(empID)
+    {
+        $scope.assignProjectToEmployee = !$scope.assignProjectToEmployee;
+        $scope.titleHeader = "AddProject";
+        $scope.assignProject = {};
+
     }
 }])
 //Not working employee controller
@@ -181,42 +199,3 @@ function ($scope,pastEmployeeService,$log, $uibModal){
 
    
 }])
-// .directive('modal', function () {
-//     return {
-//       template: '<div class="modal fade">' + 
-//           '<div class="modal-dialog">' + 
-//             '<div class="modal-content">' + 
-//               '<div class="modal-header">' + 
-//               '<h4 class="modal-title">{{titleHeader}}</h4>' + 
-//                 '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
-//               '</div>' + 
-//               '<div class="modal-body" ng-transclude></div>' + 
-//             '</div>' + 
-//           '</div>' + 
-//         '</div>',
-//       restrict: 'AE',
-//       transclude: true,
-//       replace:true,
-//       scope:true,
-//       link: function postLink(scope, element, attrs) {
-//           scope.$watch(attrs.visible, function(value){
-//           if(value == true)
-//             $(element).modal('show');
-//           else
-//             $(element).modal('hide');
-//         });
-
-//         $(element).on('shown.bs.modal', function(){
-//           scope.$apply(function(){
-//             scope.$parent[attrs.visible] = true;
-//           });
-//         });
-
-//         $(element).on('hidden.bs.modal', function(){
-//           scope.$apply(function(){
-//             scope.$parent[attrs.visible] = false;
-//           });
-//         });
-//       }
-//     };
-//   });

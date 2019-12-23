@@ -1,5 +1,5 @@
 var app= angular.module('employeeApp', ["employeeCtrlModule","popupModule","homeCtrlModule","ui.router"
-,"ngTouch", "ngAnimate", "ui.bootstrap"]);
+,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule"]);
 // app.config(['$routeProvider',function($routeProvider){
 //     $routeProvider
 //         .when("/",{
@@ -40,6 +40,11 @@ app.config(['$stateProvider', '$urlRouterProvider',
             url:"/PastEmployee",
             templateUrl:"views/pastEmployee.html",
             controller: "NotWorkingEmployeeCtrl"
+        })
+        .state('department',{
+            url: "/Department",
+            templateUrl: "views/department.html",
+            controller: "DepartmentCtrl"
         })
         $urlRouterProvider.otherwise('/');
     }

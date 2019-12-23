@@ -1,0 +1,79 @@
+<div class="jumbtron">
+    <h1 class="display-4 text-center">Department Detail</h1>
+    <hr>
+    <div class="row">
+        <button class="btn btn-success" ng-click = "btnAddNewDepartment()"> <i class="fa fa-building-o"></i> Add new department</button>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-hover">
+                <tr>
+                    <th>Department Name</th>
+                </tr>      
+                <tr ng-repeat="dep in Departments">
+                    <td ng-click="populateForm(dep)">{{dep.departmentName}}</td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <i class="far fa-trash-alt fa-lg text-danger" ng-click ="onDelete(dep.departmentID)"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>    
+        </div>
+        <hr />
+    </div>
+</div>
+<modal visible="addDepartment">
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fa fa-building-o"></i>
+                </div>
+                </div>
+                <input type="text" name="addDepartmentInfo.departmentName" ng-model="addDepartmentInfo.departmentName"
+                class="form-control" placeholder="Department Name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-lg btn-block" ng-click="addDepartmentInfo.saveDepartmentData()" ><i class="fas fa-database"></i> {{btnText}}</button>
+        </div>
+    </form>
+</modal>
+<modal visible="updateDepartment">
+    <form>
+        <div class="form-group">
+            <label>Department ID</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fa fa-building-o"></i>
+                </div>
+                </div>
+                <input type="text" name="updateDepartmentInfo.departmentID" ng-model="updateDepartmentInfo.departmentID"
+                class="form-control" placeholder="Department departmentID" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Department Name</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fa fa-building-o"></i>
+                </div>
+                </div>
+                <input type="text" name="updateDepartmentInfo.departmentName" ng-model="updateDepartmentInfo.departmentName"
+                class="form-control" placeholder="Department Name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-lg btn-block" ng-click="updateDepartmentInfo.updateDepartmentData()" ><i class="fas fa-database"></i> {{btnText}}</button>
+        </div>
+    </form>
+</modal>
