@@ -1,5 +1,5 @@
 var app= angular.module('employeeApp', ["employeeCtrlModule","popupModule","homeCtrlModule","ui.router"
-,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule"]);
+, "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule",'ngMaterial', 'ngMessages']);
 // app.config(['$routeProvider',function($routeProvider){
 //     $routeProvider
 //         .when("/",{

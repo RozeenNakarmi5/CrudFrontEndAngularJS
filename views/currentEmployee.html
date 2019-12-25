@@ -305,18 +305,21 @@
 </modal>
 <modal visible ="assignProjectToEmployee">
     <div class="form-group">
-        <label>Project</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-            <div class="input-group-text bg-white">
-                <i class="far fa-credit-card"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
-            </div> 
-            </div>
-            <input type="text" name="assignProject.projectID"  ng-model="assignProject.projectID" 
-            class="form-control" placeholder="Project ID" required maxlength="40">
-        </div>
+        <md-input-container>
+            <label>Select Projects</label>
+            <md-select ng-model="assignProject.asdf" multiple> 
+                <md-optgroup>
+                  <md-option ng-value="proj.projectID" ng-repeat="proj in project" >{{proj.projectName}}</md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
     </div>
     <div class="form-group">
         <button class="btn btn-success btn-lg btn-block" ng-click="assignProject.onAddProject()" ng-if="!form"><i class="fas fa-database"></i> {{btnText}}</button>
     </div>
 </modal>
+<style>
+.md-select-menu-container, md-backdrop {
+    z-index: 9999 !important;
+}
+</style>

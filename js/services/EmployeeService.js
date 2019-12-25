@@ -30,14 +30,11 @@ angular.module('employeeService', [])
     {
         return $http.put(apiUrl + "UpdateDepartment/" + empID,departmentInfo)
     }
-    this.assignProject = function(departmentInfo)
+    this.assignProject = function(projectInfo)
     {
-        return $http.put(apiUrl + "AssignProjectToEmployee" + departmentInfo)
+        return $http.post(apiUrl + "AssignProjectToEmployee",projectInfo)
     }
-    this.getProject = function ()
-    {
-        return $http.put("http://localhost:8812/api/employee/")
-    }
+  
     
 })
 .service ('pastEmployeeService', function($http)

@@ -1,6 +1,6 @@
-angular.module("employeeCtrlModule", ['employeeService'])
-.controller("EmployeeCtrl",["$scope","currentEmployeeService","$log",
- function($scope, currentEmployeeService, $log){
+angular.module("employeeCtrlModule", ['employeeService','ProjectService'])
+.controller("EmployeeCtrl",["$scope","currentEmployeeService","$log","projectService",
+ function($scope, currentEmployeeService, $log, projectService){
     $scope.btnText = "Save";
     $scope.employeeId = 0;
     $scope.showModal = false;
@@ -148,8 +148,28 @@ angular.module("employeeCtrlModule", ['employeeService'])
         $scope.assignProjectToEmployee = !$scope.assignProjectToEmployee;
         $scope.titleHeader = "AddProject";
         $scope.assignProject = {};
+        $scope.assignProject.asdf = [];
+        var pGet = projectService.getProject();
+        pGet.then(function (pl) { $scope.project = pl.data },
 
+        function (errorPl) {
+            $log.error('failure loading Project', errorPl);
+        });
+        $scope.assignProject.onAddProject = function()
+        {
+            var updateEmployeeProject = {
+                employeeID : empID,
+                projectID : $scope.assignProject.asdf
+            }
+            var updateProject = currentEmployeeService.assignProject(updateEmployeeProject);
+            updateProject.then(function(){
+                alert("Assigned Project");
+                loadRecords ();
+                $scope.assignProjectToEmployee = false;
+            })
+        }
     }
+    
 }])
 
 
