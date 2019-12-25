@@ -1,23 +1,6 @@
 var app= angular.module('employeeApp', ["employeeCtrlModule","popupModule","homeCtrlModule","ui.router"
-,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule"]);
-// app.config(['$routeProvider',function($routeProvider){
-//     $routeProvider
-//         .when("/",{
-//             templateUrl:"views/home.html",
-//             controller:"HomeCtrl"
-//         })
-//         .when("/Employee",{
-//             templateUrl:"views/employeeCrud.html",
-//         })
-//         .when("/Employee/PastEmployee", {
-//             templateUrl:"views/pastEmployee.html",
-//             controller: "NotWorkingEmployeeCtrl"
-//         })
-//         .when("/Employee/CurrentEmployee",{
-//             templateUrl:"views/currentEmployee.html",
-//             controller: "EmployeeCtrl"
-//         })
-// }])
+,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule","clientCtrlModule"]);
+
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider,$urlRouterProvider)
     {
@@ -60,6 +43,20 @@ app.config(['$stateProvider', '$urlRouterProvider',
             url: "/GetScrap",
             templateUrl:"views/Projects/scrapProjects.html",
             controller :"scrapCtrl"
+        })
+        .state('clients',{
+            url: "/client",
+            templateUrl:"views/clients/clientHome.html",
+        })
+        .state('clients.list',{
+            url: "/ListClient",
+            templateUrl:"views/clients/clientList.html",
+            controller :"clientCtrl"
+        })
+        .state('clients.crud',{
+            url: "/SetClient",
+            templateUrl:"views/clients/clientCRUD.html",
+            controller :"setclientCtrl"
         })
         
         $urlRouterProvider.otherwise('/');

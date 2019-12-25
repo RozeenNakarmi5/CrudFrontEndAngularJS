@@ -38,6 +38,10 @@ angular.module('employeeService', [])
     {
         return $http.put("http://localhost:8812/api/employee/")
     }
+    this.editContact = function (empID, contactData)
+    {
+        return $http.put("http://localhost:8812/api/employee/updatecontact/" + empID, contactData)
+    }
     
 })
 .service ('pastEmployeeService', function($http)
