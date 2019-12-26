@@ -1,8 +1,9 @@
-angular.module("homeCtrlModule", ['employeeService','ProjectService'])
-.controller("HomeCtrl",["$scope","currentEmployeeService","projectService","$log", 
-function($scope,currentEmployeeService,projectService, $log){
+angular.module("homeCtrlModule", ['employeeService','ProjectService', 'ClientService'])
+.controller("HomeCtrl",["$scope","currentEmployeeService","projectService","listClientService","$log", 
+function($scope,currentEmployeeService,projectService, listClientService, $log){
     countEmployees(); 
     countProjects();
+    countClients();
 
     function countEmployees(){
         var promiseGet = currentEmployeeService.countEmployees();
@@ -16,6 +17,15 @@ function($scope,currentEmployeeService,projectService, $log){
     function countProjects(){
         var promiseGet = projectService.countProject();
         promiseGet.then(function (pl){$scope.ProjectCount = pl.data},
+        function (errorPl)
+        {
+            $log.error('failure loading Project', errorPl);
+        });
+    }
+
+    function countClients(){
+        var promiseGet = listClientService.countClients();
+        promiseGet.then(function (pl){$scope.ClientCount = pl.data},
         function (errorPl)
         {
             $log.error('failure loading Project', errorPl);

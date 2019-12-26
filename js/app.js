@@ -56,7 +56,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
         .state('clients.crud',{
             url: "/SetClient",
             templateUrl:"views/clients/clientCRUD.html",
-            controller :"setclientCtrl"
+            controller :"setClientCtrl"
         })
         
         $urlRouterProvider.otherwise('/');

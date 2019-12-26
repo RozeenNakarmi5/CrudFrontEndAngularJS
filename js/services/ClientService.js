@@ -17,10 +17,13 @@ angular.module('ClientService', [])
     {
         return $http.put(apiURL + CID,clientData)
     }
+    this.countClients = function (){
+        return $http.get(apiURL + "ClientCount");
+    }
 })
 
 .service ('setClientService', function($http){
-    var apiURL = "http://localhost:8812/api/client/setClient";
+    var apiURL = "http://localhost:8812/api/client/setClient/";
     this.getClientProject = function()
     {
         return $http.get(apiURL);

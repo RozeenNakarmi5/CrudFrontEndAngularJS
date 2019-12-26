@@ -1,30 +1,29 @@
-<div>
-    <button class="btn btn-primary" ng-click="addNewClient()"> <i class="fas fa-user-plus"></i> Set client project
-        </button>
-</div>
+
 
 <div class="col-md-12">
     <table class="table table-hover">
         <tr>
-            <th>ClientID</th>
+            <th>Client ProjectID</th>
+            <th>Client ID</th>
             <th>Client Name</th>
-            <th>Client Office</th>
-            <th>Client Office Address</th>
             <th>Project Name</th>
+            <th>Project Description</th>
+            <th>Status</th>
             <th>Delete</th>
         </tr>
         <tr ng-repeat="c in clients">
-            <td ng-click="editClient(c)">{{c.clientID}}</td>
-            <td ng-click="editClient(c)"> {{c.clientFirstName}}</td>
-            <td ng-click="editClient(c)">{{c.clientOffice}}</td>
-            <td ng-click="editClient(c)">{{c.officeAddress}}</td>
-            <td ng-click="editClient(c)">{{c.projectName}}</td>
+            <td>{{c.clientProjectID}}</td>
+            <td>{{c.clientID}}</td>
+            <td> {{c.clientFirstName}}</td>
+            <td>{{c.projectName}}</td>
+            <td>{{c.projectDescription}}</td>
+            <td>{{c.isActive}}</td>
 
             <td>
                 <table class="table table-borderless">
                     <tr>
                         <td>
-                            <i class="far fa-trash-alt fa-lg text-danger" ng-click="delete(c.clientID)"></i>
+                            <i class="far fa-trash-alt fa-lg text-danger" ng-click="delete(c.clientProjectID)"></i>
                         </td>
 
                     </tr>
@@ -106,6 +105,22 @@
 
 <modal visible="editClientModal">
     <div class="form-group">
+        
+        
+        
+        <label for="ClientID">Client Project ID</label>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle" [class.green-icon]="name.valid"
+                        [class.red-icon]="name.invalid && name.touched"></i>
+                </div>
+            </div>
+            <input type="text" name="ClientProjectID" ng-model="edit.ClientProjectID" class="form-control" placeholder="Client Project ID"
+                disabled>
+        </div>
+
         <label for="ClientID">Client ID</label>
 
         <div class="input-group">
@@ -115,7 +130,7 @@
                         [class.red-icon]="name.invalid && name.touched"></i>
                 </div>
             </div>
-            <input type="text" name="ClientID" ng-model="ClientID" class="form-control" placeholder="Client ID"
+            <input type="text" name="ClientID" ng-model="edit.ClientID" class="form-control" placeholder="Client ID"
                 disabled>
         </div>
 
@@ -131,28 +146,6 @@
             <input type="text" name="ClientName" ng-model="edit.ClientName" class="form-control"
                 placeholder="Client Name" required>
         </div>
-        <label for="ClientDesc">Client Office</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text bg-white">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-            </div>
-            <input type="text" name="ClientOffice" ng-model="edit.ClientOffice" class="form-control"
-                placeholder="Client Description" required>
-        </div>
-
-        <label for="startDate">Office Address</label>
-
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text bg-white">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-            </div>
-            <input type="text" name="ClientOAddress" ng-model="edit.ClientOAddress" class="form-control"
-                placeholder="Client Start Date" required>
-        </div>
 
         <label for="endDate">Project Name</label>
 
@@ -163,12 +156,39 @@
                 </div>
             </div>
             <input type="text" name="ProjectName" ng-model="edit.ProjectName" class="form-control"
-                placeholder="Client End Date" required>
+                placeholder="Project Name" required>
+        </div>
+
+        <label for="ClientDesc">Project Description</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <input type="text" name="ProjectDescription" ng-model="edit.ProjectDescription" class="form-control"
+                placeholder="Project Description" required>
+        </div>
+
+        <label for="startDate">Status</label>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <input type="text" name="Status" ng-model="edit.Status" class="form-control"
+                placeholder="Status" required>
         </div>
 
         <div class="form-group">
-            <button class="btn btn-success btn-lg btn-block" ng-click="saveData()" ng-if="!form"><i
+            <button class="btn btn-success btn-lg btn-block" ng-click="updateClient()" ng-if="!form"><i
                     class="fas fa-database"></i> Save </button>
         </div>
     </div>
+</modal>
+<modal visible="deleteClientModal">
+    <button class="btn btn-primary" ng-click="deleteClient()">Yes</button>
+    <button class="btn btn-secondary" ng-click="delete()">No</button>
 </modal>

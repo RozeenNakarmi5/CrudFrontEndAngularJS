@@ -20,7 +20,11 @@
             <td ng-click="editClient(c)">{{c.clientContactNumber}}</td>
             <td>
                 <table class="table table-borderless">
+
                     <tr>
+                        <td>
+                            <i class="fas fa-tasks" ng-click="addProject(c.clientID)"></i>
+                        </td>
                         <td>
                             <i class="far fa-trash-alt fa-lg text-danger" ng-click="delete(c.clientID)"></i>
                         </td>
@@ -61,7 +65,7 @@
                 placeholder="Client Name" required>
         </div>
 
-        
+
         <label for="ClientDesc">Client Office</label>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -177,3 +181,24 @@
     <button class="btn btn-primary" ng-click="deleteClient()">Yes</button>
     <button class="btn btn-secondary" ng-click="delete()">No</button>
 </modal>
+<modal visible="assignProjectToClient">
+    <div class="form-group">
+        <md-input-container>
+            <label>Select Projects</label>
+            <md-select ng-model="assignProject.projects" multiple>
+                <md-optgroup>
+                    <md-option ng-value="proj.projectID" ng-repeat="proj in project">{{proj.projectName}}</md-option>
+                </md-optgroup>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success btn-lg btn-block" ng-click="assignProject.onAddProject()" ng-if="!form"><i
+                class="fas fa-database"></i> {{btnText}}</button>
+    </div>
+</modal>
+<style>
+    .md-select-menu-container, md-backdrop {
+        z-index: 9999 !important;
+    }
+</style>
