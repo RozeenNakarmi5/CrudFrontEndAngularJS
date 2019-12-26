@@ -6,8 +6,9 @@
             <th>Client ProjectID</th>
             <th>Client ID</th>
             <th>Client Name</th>
+            <th>Project ID</th>
             <th>Project Name</th>
-            <th>Project Description</th>
+
             <th>Status</th>
             <th>Delete</th>
         </tr>
@@ -15,8 +16,8 @@
             <td>{{c.clientProjectID}}</td>
             <td>{{c.clientID}}</td>
             <td> {{c.clientFirstName}}</td>
+            <td>{{c.projectID}}</td>
             <td>{{c.projectName}}</td>
-            <td>{{c.projectDescription}}</td>
             <td>{{c.isActive}}</td>
 
             <td>
@@ -34,7 +35,7 @@
 </div>
 
 
-<modal visible="addClientModal">
+<!-- <modal visible="addClientModal">
     <div class="form-group">
         <label for="ClientID">Client ID</label>
 
@@ -159,17 +160,6 @@
                 placeholder="Project Name" required>
         </div>
 
-        <label for="ClientDesc">Project Description</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text bg-white">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-            </div>
-            <input type="text" name="ProjectDescription" ng-model="edit.ProjectDescription" class="form-control"
-                placeholder="Project Description" required>
-        </div>
-
         <label for="startDate">Status</label>
 
         <div class="input-group">
@@ -187,7 +177,8 @@
                     class="fas fa-database"></i> Save </button>
         </div>
     </div>
-</modal>
+</modal> -->
+
 <modal visible="deleteClientModal">
     <button class="btn btn-primary" ng-click="deleteClient()">Yes</button>
     <button class="btn btn-secondary" ng-click="delete()">No</button>

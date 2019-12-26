@@ -20,9 +20,9 @@ angular.module('ClientService', [])
     this.countClients = function (){
         return $http.get(apiURL + "ClientCount");
     }
-    this.assignProject = function(departmentInfo)
+    this.assignProject = function(projectInfo)
     {
-        return $http.put(apiURL + "AssignProjectToClient" + departmentInfo)
+        return $http.post(apiURL + "AssignProjectToClient", projectInfo)
     }
 })
 

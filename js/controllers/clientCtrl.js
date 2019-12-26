@@ -98,7 +98,7 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                     console.log("Error: " + error);
                 });
             }
-            $scope.addProject = function (clientID) {
+            $scope.addProject = function (CID) {
                 $scope.assignProjectToClient = !$scope.assignProjectToClient;
                 $scope.titleHeader = "AddProject";
                 $scope.assignProject = {};
@@ -112,7 +112,7 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
 
                 $scope.assignProject.onAddProject = function () {
                     var updateClientProject = {
-                        clientID: clientID,
+                        clientID: CID,
                         projectID: $scope.assignProject.projects
                     }
                     var updateProject = listClientService.assignProject(updateClientProject);
