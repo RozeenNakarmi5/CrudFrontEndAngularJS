@@ -1,5 +1,5 @@
 var app= angular.module('employeeApp', ["employeeCtrlModule","popupModule","homeCtrlModule","ui.router"
-,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule","clientCtrlModule"]);
+,"ngTouch", "ngAnimate", "ui.bootstrap","departmentCtrlModule",  "projectCtrlModule","clientCtrlModule", 'ngMaterial', 'ngMessages']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider,$urlRouterProvider)
