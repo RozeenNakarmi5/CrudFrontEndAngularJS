@@ -1,4 +1,4 @@
-angular.module("homeCtrlModule", ['employeeService','ProjectService', 'ClientService'])
+angular.module("homeCtrlModule", ['employeeService','ProjectService', 'ClientService',  'angularUtils.directives.dirPagination'])
 .controller("HomeCtrl",["$scope","currentEmployeeService","projectService","listClientService","$log", 
 function($scope,currentEmployeeService,projectService, listClientService, $log){
     countEmployees(); 

@@ -12,7 +12,7 @@
             <th>Status</th>
             <th>Delete</th>
         </tr>
-        <tr ng-repeat="c in clients">
+        <tr dir-paginate="c in clients | filter:search | itemsPerPage:5">
             <td>{{c.clientProjectID}}</td>
             <td>{{c.clientID}}</td>
             <td> {{c.clientFirstName}}</td>
@@ -34,7 +34,10 @@
     </table>
 </div>
 
-
+<div class="pages">
+    <dir-pagination-controls max-size="3" direction-links="true" boundary-links="true" >
+    </dir-pagination-controls>
+</div>
 <!-- <modal visible="addClientModal">
     <div class="form-group">
         <label for="ClientID">Client ID</label>
