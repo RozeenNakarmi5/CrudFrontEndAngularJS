@@ -16,7 +16,7 @@
 </div>
 <br />
 
-<div class="col-md-12" style="float: center;">
+<div class="col-md-12" style="float: center; text-align: center;">
     <table class="table table-hover">
         <tr class="table text-center">
             <th>Employee ID</th>
@@ -59,7 +59,7 @@
         </tr>
     </table>
 </div>
-
+<hr>
 <div class="pages">
     <dir-pagination-controls max-size="3" direction-links="true" boundary-links="true">
     </dir-pagination-controls>
@@ -194,11 +194,16 @@
                                 <i class="far fa-credit-card" [class.green-icon]="address.valid"
                                     [class.red-icon]="address.invalid && address.touched"></i>
                             </div>
+                            <div ng-controller="UploadCtrl">
+                                <input type="file" ng-model="insertEmployee.imageSrc" name="imageSrc" class="form-control"
+                                    ng-file-select="onFileSelect($files)" placeholder="Employee Profile Picture">
+                                <!-- {{imageSrc}} -->
+                                <img class="empimage" ng-src="{{insertEmployee.imageSrc}}" alt="" />
+                            </div>
                         </div>
-                        <input type="text" name="insertEmployee.profilePicture" ng-model="insertEmployee.profilePicture"
-                            class="form-control" placeholder="Employee Profile Picture">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -369,6 +374,23 @@
 
 <modal visible="editContacts">
     <div class="form-group">
+        <label for="pp">picture</label>
+        <div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                        <i class="fas fa-user-circle" [class.green-icon]="name.valid"
+                            [class.red-icon]="name.invalid && name.touched"></i>
+                    </div>
+                </div>
+                <input type="file" ng-model="editContact.profilePicture" name="imageSrc" class="form-control"
+                                    ng-file-select="onFileSelect($files)" placeholder="Employee Profile Picture">
+                <img class= "empimage" ng-src="{{editContact.profilePicture}}" alt="" ng-click=""/>
+                <!-- <input type="text" name="editContact.profilePicture" ng-model="editContact.profilePicture" class="form-control"
+                    disabled> -->
+            </div>
+        </div>
+
         <label for="contactID">ContactID</label>
         <div>
             <div class="input-group">

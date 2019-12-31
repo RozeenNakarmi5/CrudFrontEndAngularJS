@@ -94,7 +94,7 @@ angular.module("employeeCtrlModule", ['employeeService'])
                         email: $scope.insertEmployee.email,
                         contactNumber: $scope.insertEmployee.contactNumber,
                         emergencyContactNumber: $scope.insertEmployee.emergencyContactNumber,
-                        profilePicture: $scope.insertEmployee.profilePicture,
+                        profilePicture: $scope.insertEmployee.imageSrc,
                         designation: $scope.insertEmployee.designation,
                         salary: $scope.insertEmployee.salary,
                         isFullTimer: $scope.insertEmployee.isFullTimer,
@@ -223,6 +223,5 @@ angular.module("employeeCtrlModule", ['employeeService'])
 
                 }
             }
-
-
         }])
+        
