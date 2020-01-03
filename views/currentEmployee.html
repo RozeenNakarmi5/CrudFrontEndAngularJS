@@ -15,16 +15,22 @@
     </div>
 </div>
 <br />
+<!-- <div>
+    <div ui-grid="gridOptions" ui-grid-pagination></div>
+</div> -->
 
 <div class="col-md-12" style="float: center; text-align: center;">
     <table class="table table-hover">
         <tr class="table text-center">
+
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Employee Address</th>
             <th>Employee Designation</th>
             <th>Actions</th>
         </tr>
+
+        <!-- <tr ng-repeat="emp in Employees| filter:search | startFrom: currentPage*5"> -->
         <tr dir-paginate="emp in Employees | filter:search | itemsPerPage: 5">
             <td ng-click="populateForm(emp)">{{emp.employeeID}}</td>
             <td ng-click="populateForm(emp)">{{emp.firstName}}</td>
@@ -50,20 +56,33 @@
                         <td>
                             <i class="fas fa-user-edit" ng-click="editContactx(emp)"></i>
                         </td>
-                        <!-- <td>
-                                <i class="fas fa-user-edit" ng-click="editContact(emp)"></i>
-                            </td> -->
+
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
+    <hr>
+    <div>
+
+        <button ng-disabled="currentPage == 0" ng-click="change(-1)">
+            Previous
+        </button>
+        {{currentPage+1}}/{{numberOfPages()}}
+        <button ng-disabled="currentPage >= ((EmployeesCount)/5) -1 " ng-click="change(1)">
+            Next {{EmployeesCount}}
+        </button>
+
+
+    </div>
 </div>
-<hr>
-<div class="pages">
+
+
+
+<!-- <div class="pages">
     <dir-pagination-controls max-size="3" direction-links="true" boundary-links="true">
     </dir-pagination-controls>
-</div>
+</div> -->
 
 <modal visible="showModal">
     <div class="form-group">
@@ -195,8 +214,9 @@
                                     [class.red-icon]="address.invalid && address.touched"></i>
                             </div>
                             <div ng-controller="UploadCtrl">
-                                <input type="file" ng-model="insertEmployee.imageSrc" name="imageSrc" class="form-control"
-                                    ng-file-select="onFileSelect($files)" placeholder="Employee Profile Picture">
+                                <input type="file" ng-model="insertEmployee.imageSrc" name="imageSrc"
+                                    class="form-control" ng-file-select="onFileSelect($files)"
+                                    placeholder="Employee Profile Picture">
                                 <!-- {{imageSrc}} -->
                                 <img class="empimage" ng-src="{{insertEmployee.imageSrc}}" alt="" />
                             </div>
@@ -384,8 +404,8 @@
                     </div>
                 </div>
                 <input type="file" ng-model="editContact.profilePicture" name="imageSrc" class="form-control"
-                                    ng-file-select="onFileSelect($files)" placeholder="Employee Profile Picture">
-                <img class= "empimage" ng-src="{{editContact.profilePicture}}" alt="" ng-click=""/>
+                    ng-file-select="onFileSelect($files)" placeholder="Employee Profile Picture">
+                <img class="empimage" ng-src="{{editContact.profilePicture}}" alt="" ng-click="" />
                 <!-- <input type="text" name="editContact.profilePicture" ng-model="editContact.profilePicture" class="form-control"
                     disabled> -->
             </div>

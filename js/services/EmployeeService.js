@@ -2,9 +2,10 @@ angular.module('employeeService', [])
 .service ('currentEmployeeService', function($http)
 {
     var apiUrl = "http://localhost:8812/api/employee/";
-    this.getEmployees = function()
+    this.getEmployees = function(pageNumber)
     {
-        return $http.get(apiUrl);
+        
+        return $http.get(apiUrl + "?pageNumber=" + pageNumber);
     }
     this.countEmployees = function()
     {

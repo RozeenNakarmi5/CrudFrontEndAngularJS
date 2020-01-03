@@ -88,8 +88,6 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                         alert("Data Delete Successfully");
                         $scope.deleteClientModal = !$scope.deleteClientModal;
                         loadRecords();
-
-
                     }
                     else {
                         alert("Something wrong when adding Deleting client ");

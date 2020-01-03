@@ -1,6 +1,6 @@
 angular.module("employeeCtrlModule", ['employeeService'])
-    .controller("EmployeeCtrl", ["$scope", "currentEmployeeService", "$log",
-        function ($scope, currentEmployeeService, $log) {
+    .controller("EmployeeCtrl", ["$scope", "currentEmployeeService", "$log", '$filter',
+        function ($scope, currentEmployeeService, $log, $filter) {
             $scope.btnText = "Save";
             $scope.employeeId = 0;
             $scope.showModal = false;
@@ -10,14 +10,18 @@ angular.module("employeeCtrlModule", ['employeeService'])
             $scope.assignProjectToEmployee = false;
             $scope.editContacts = false;
 
-            
             loadRecords();
-            function loadRecords() {
-                var promiseGet = currentEmployeeService.getEmployees();
-                promiseGet.then(function (pl) { $scope.Employees = pl.data },
+
+            function loadRecords(pageNumber) {
+                var pGet = currentEmployeeService.getEmployees(pageNumber);
+                pGet.then(function (pl) {
+                    $scope.Employees = pl.data;
+                },
+
                     function (errorPl) {
-                        $log.error('failure loading Employee', errorPl);
-                    });
+                        $log.error('failed to load clients', errorPl);
+                    }
+                )
             }
 
             $scope.populateForm = function (empData) {
@@ -78,14 +82,14 @@ angular.module("employeeCtrlModule", ['employeeService'])
                         alert("Updated contact information successfully");
                         loadRecords();
                         $scope.editContacts = false;
-                    
+
                     });
                 }
             }
             $scope.btnAddNewEmployee = function () {
-                $scope.insertEmployee = {};
                 $scope.titleHeader = "Add Employee";
                 $scope.addNewEmployee = !$scope.addNewEmployee;
+                $scope.insertEmployee = {};
                 $scope.insertEmployee.saveEmployeeData = function () {
                     var employees = {
                         firstName: $scope.insertEmployee.firstName,
@@ -150,7 +154,7 @@ angular.module("employeeCtrlModule", ['employeeService'])
                     });
                 }
             }
-            
+
 
             $scope.onUpdateDepartment = function (empID) {
                 $scope.updatingDepartment = {};
@@ -176,8 +180,46 @@ angular.module("employeeCtrlModule", ['employeeService'])
                 $scope.assignProject = {};
 
             }
+
+            //pagination from codepen.io .... code from here copied and modified
+            $scope.currentPage = 0;
+            $scope.pageSize = 5;
+            currentEmployeeService.countEmployees().then(function (pl) { $scope.EmployeesCount = pl.data });
+
+
+            $scope.numberOfPages = function () {
+                return Math.ceil($scope.EmployeesCount / 5);
+            }
+
+            $scope.change = function (a) {
+                $scope.currentPage = $scope.currentPage + a;
+
+                console.log($scope.currentPage);
+
+                // return loadRecords($scope.currentPage+1);
+                var pGet = currentEmployeeService.getEmployees($scope.currentPage+1);
+                pGet.then(function (pl) {
+                    $scope.Employees = pl.data;
+                },
+
+                    function (errorPl) {
+                        $log.error('failed to load clients', errorPl);
+                    }
+                )
+            }
+            // $scope.previous = function(){
+            //     $scope.currentPage=$scope.currentPage-1
+            //     return loadRecords($scope.currentPage);
+            // }
+
         }])
 
+    // .filter('startFrom', function () {
+    //     return function (input, start) {
+    //         start = +start; //parse to int
+    //         return input.slice(start);
+    //     }
+    // })
 
     //Not working employee controller
     .controller("NotWorkingEmployeeCtrl", ["$scope", "pastEmployeeService", "$log", '$uibModal',
@@ -224,4 +266,4 @@ angular.module("employeeCtrlModule", ['employeeService'])
                 }
             }
         }])
-        
+
