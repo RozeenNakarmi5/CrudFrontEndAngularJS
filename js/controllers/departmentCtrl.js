@@ -1,6 +1,6 @@
 angular.module("departmentCtrlModule", ['departmentService'])
 .controller("DepartmentCtrl",["$scope","departService","$log", 
-function ($scope,departService,log)
+function ($scope,departService,$log)
 {
     $scope.addDepartment = false;
     $scope.updateDepartment = false;
