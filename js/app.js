@@ -21,14 +21,23 @@ app.run(function ($rootScope, $location,$http)
             let decodedJwtJsonData = window.atob(jwtData);
             let decodedJwtData = JSON.parse(decodedJwtJsonData);
             let role = decodedJwtData.role;
-            if(toState.data.role === role)
-            {
-                 $http.defaults.headers.common.Authorization = 'Bearer ' + token;
-            }
-            else
-            {
-                $http.defaults.headers.common.Authorization = ' ';
-            }
+            let isAuthorized= false;
+            angular.forEach(toState.data.role, function(v, k){
+                if (v === role)
+                {
+                    isAuthorized = true;
+                }
+
+            });
+            if(isAuthorized === true)
+                {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+                }
+                else
+                {
+                    $http.defaults.headers.common.Authorization = ' ';
+                }
+            
           }
         }
       });
@@ -44,7 +53,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             controller:"HomeCtrl",
             data: {
                 ensureAuthenticated: true,
-                
+                role: ['Admin', 'Team Leads']
             }
             
         })
@@ -84,7 +93,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             templateUrl:"views/Projects/ProjectHome.html",
             data: {
                 ensureAuthenticated: true,
-                role: 'Team Leads'
+                role: ['Team Leads']
             }
         })
         .state('project.current',{
@@ -93,7 +102,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             controller :"projectCtrl",
             data: {
                 ensureAuthenticated: true,
-                role: 'Team Leads'
+                role: ['Team Leads']
             }
         })
         .state('project.scrap',{
@@ -102,7 +111,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
             controller :"scrapCtrl",
             data: {
                 ensureAuthenticated: true,
-                role: 'Team Leads'
+                role: ['Team Leads']
             }
         })
 
