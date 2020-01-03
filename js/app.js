@@ -1,6 +1,6 @@
 var app = angular.module('employeeApp', ["employeeCtrlModule", "popupModule", "homeCtrlModule", "ui.router"
     , "ngTouch", "ngAnimate", "ui.bootstrap", "departmentCtrlModule", "projectCtrlModule",
-    "clientCtrlModule", "ngMaterial", "ngMessages", "uploadCtrlModule", 'ui.grid','ui.grid.pagination']);
+    "clientCtrlModule", "ngMaterial", "ngMessages", "uploadCtrlModule"]);
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
