@@ -78,7 +78,7 @@
                     controller: "DepartmentCtrl",
                     data: {
                         ensureAuthenticated: true,
-                        role: 'Admin'
+                        role: ['Admin', 'Team Leads']
                     }
                 })
                 .state('project', {

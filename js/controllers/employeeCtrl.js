@@ -162,7 +162,6 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                 $scope.assignProject.asdf = [];
                 var pGet = projectService.getProject();
                 pGet.then(function (pl) { $scope.project = pl.data },
-
                 function (errorPl) {
                     $log.error('failure loading Project', errorPl);
                 });
@@ -180,7 +179,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                     })
                 }
             }
-                    $scope.onUpdateDepartment = function (empID) {
+            $scope.onUpdateDepartment = function (empID) {
                 $scope.updatingDepartment = {};
                 $scope.titleHeader = "Update Department";
                 $scope.updatingDepartment.departmentID = "";
@@ -197,12 +196,6 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                         $scope.addDepartmentModal = false;
                     });
                 }
-            }
-            $scope.addProject = function (empID) {
-                $scope.assignProjectToEmployee = !$scope.assignProjectToEmployee;
-                $scope.titleHeader = "AddProject";
-                $scope.assignProject = {};
-
             }
 
             //pagination from codepen.io .... code from here copied and modified
