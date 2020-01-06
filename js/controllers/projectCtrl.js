@@ -27,16 +27,18 @@ angular.module("projectCtrlModule", ['ProjectService'])
 
                 $scope.titleHeader = "Add Project";
                 $scope.addProjectModal = !$scope.addProjectModal;
+                $scope.insertProject = {};
 
                 $scope.saveData = function () {
                     var project = {
-                        
-                        projectName: $scope.projectName,
-                        projectDescription: $scope.projectDescription,
-                        projectStartDate: $scope.projectStartDate,
-                        projectEndDate: $scope.projectEndDate
-                        
-                        
+
+                        projectName: $scope.insertProject.projectName,
+                        projectDescription: $scope.insertProject.projectDesc,
+                        projectStartDate: $scope.insertProject.projectSD,
+                        projectEndDate: $scope.insertProject.projectED,
+                        isActive: true
+
+
                     }
                     var addProject = projectService.postProject(project);
                     addProject.then(function () {
@@ -52,9 +54,9 @@ angular.module("projectCtrlModule", ['ProjectService'])
                 }
             }
 
-            $scope.edit = [];
-            $scope.editProject = function (proj) {
 
+            $scope.editProject = function (proj) {
+                $scope.edit = [];
                 $scope.titleHeader = "Edit Project Details" + proj.projectName;
                 $scope.editProjectModal = !$scope.editProjectModal;
                 $scope.edit.projectID = proj.projectID;
@@ -116,32 +118,30 @@ angular.module("projectCtrlModule", ['ProjectService'])
         function ($scope, scrapProjectService, $log) {
 
             loadRecords();
-            
+
             function loadRecords() {
                 var pGet = scrapProjectService.getScrap();
-                pGet.then(function (pl) { $scope.p = pl.data },
+                pGet.then(function (pl) { $scope.projects = pl.data },
 
                     function (errorPl) {
                         $log.error('failure loading Project', errorPl);
                     });
             }
 
-            $scope.restore =[];
-            $scope.restore = function(projectID){
+            $scope.restore = [];
+            $scope.restore = function (projectID) {
                 $scope.titleHeader = "Restore?";
                 $scope.restoreProjectModal = !$scope.restoreProjectModal;
                 $scope.restore.PID = projectID;
             }
 
-            $scope.restoreProject = function (){
+            $scope.restoreProject = function () {
                 var restoreProject = scrapProjectService.restoreProject($scope.restore.PID);
                 restoreProject.then(function (response) {
                     if (response.data != "") {
                         alert("Data restored Successfully");
                         $scope.restoreProjectModal = !$scope.restoreProjectModal;
                         loadRecords();
-                        
-
                     }
                     else {
                         alert("Something wrong when adding Deleting project ");
