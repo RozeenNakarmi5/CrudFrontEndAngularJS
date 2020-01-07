@@ -12,7 +12,15 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
             $scope.empScheduleModal = false;
 
             loadRecords();
-
+            loadDepartments();
+            function loadDepartments()
+            {
+                var pGet = departService.getDepartments();
+                pGet.then(function (pl) { $scope.departments = pl.data },
+                function (errorPl) {
+                    $log.error('failure loading department', errorPl);
+                });
+            }
             function loadRecords(pageNumber) {
                 var pGet = currentEmployeeService.getEmployees(pageNumber);
                 pGet.then(function (pl) {
@@ -101,11 +109,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
             $scope.btnAddNewEmployee = function () {
                 $scope.titleHeader = "Add Employee";
                 $scope.addNewEmployee = !$scope.addNewEmployee;
-                var pGet = departService.getDepartments();
-                pGet.then(function (pl) { $scope.departments = pl.data },
-                function (errorPl) {
-                    $log.error('failure loading department', errorPl);
-                });
+              
                 $scope.insertEmployee = {};
                 $scope.insertEmployee.saveEmployeeData = function () {
                     var employees = {
@@ -170,6 +174,11 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         alert("Updated role successfully");
                         loadRecords();
                         $scope.showModal = false;
+                    }, function(error)
+                    {
+                        console.log("Error: " + error);
+                        $scope.showModal = false;
+
                     });
                 }
             }
@@ -195,7 +204,12 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         alert("Assigned Project");
                         loadRecords ();
                         $scope.assignProjectToEmployee = false;
-                    })
+                    }, function(error)
+                    {
+                        console.log("Error: " + error);
+                        $scope.assignProjectToEmployee = false;
+
+                    });
                 }
             }
             $scope.onUpdateDepartment = function (empID) {
@@ -212,6 +226,10 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                     updateDepartment.then(function () {
                         alert("Updated department successfully");
                         loadRecords();
+                        $scope.addDepartmentModal = false;
+                    }, function(error)
+                    {
+                        console.log("Error: " + error);
                         $scope.addDepartmentModal = false;
                     });
                 }

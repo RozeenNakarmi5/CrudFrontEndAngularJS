@@ -26,9 +26,12 @@
     <table class="table table-hover">
         <tr class="table text-center">
             <th>Employee ID</th>
-            <th>Employee Name</th>
+            <th>Employee First Name</th>
+            <th>Employee Last Name</th>
             <th>Employee Address</th>
             <th>Employee Designation</th>
+            <th>Role</th>
+            <th>Department</th>
             <th>Actions</th>
         </tr>
 
@@ -36,8 +39,11 @@
         <tr dir-paginate="emp in Employees | filter:search | itemsPerPage: 5">
             <td ng-click="populateForm(emp)">{{emp.employeeID}}</td>
             <td ng-click="populateForm(emp)">{{emp.firstName}}</td>
+            <td ng-click="populateForm(emp)">{{emp.lastName}}</td>
             <td ng-click="populateForm(emp)">{{emp.address}}</td>
             <td ng-click="populateForm(emp)">{{emp.designation}}</td>
+            <td>{{emp.roleName}}</td>
+            <td>{{emp.departmentName}}</td>
             <td>
                 <table class="table table-borderless">
                     <tr>
@@ -91,8 +97,13 @@
                     <i class="fas fa-user-circle"></i>
                 </div>
             </div>
-            <input type="text" name="updatingRoles.roleID" ng-model="updatingRoles.roleID" class="form-control"
-                placeholder="Role ID" required>
+            <!-- <input type="text" name="updatingRoles.roleID" ng-model="updatingRoles.roleID" class="form-control"
+                placeholder="Role ID" required> -->
+            <md-select class="form-control" placeholder="Select Role" name="updatingRoles.roleID" ng-model="updatingRoles.roleID" > 
+                <md-option ng-value="1">Admin</md-option>
+                <md-option ng-value="2">Team Leads</md-option>
+                <md-option ng-value="3">Employees</md-option>
+            </md-select>
         </div>
     </div>
     <div class="form-group">
@@ -108,8 +119,11 @@
                     <i class="fas fa-user-circle"></i>
                 </div>
             </div>
-            <input type="text" name="updatingDepartment.departmentID" ng-model="updatingDepartment.departmentID"
-                class="form-control" placeholder="Department ID" required>
+            <!-- <input type="text" name="updatingDepartment.departmentID" ng-model="updatingDepartment.departmentID"
+                class="form-control" placeholder="Department ID" required> -->
+            <md-select class="form-control" ng-model="updatingDepartment.departmentID" placeholder="Select Department"> 
+                <md-option ng-value="dept.departmentID" ng-repeat="dept in departments" >{{dept.departmentName}}</md-option>
+            </md-select>
         </div>
     </div>
     <div class="form-group">
