@@ -2,7 +2,7 @@
     'use strict';
     var app = angular.module('employeeApp', ["LoginService", "ngRoute", "employeeCtrlModule", "popupModule", "homeCtrlModule", "ui.router"
         , "ngAnimate", "ui.bootstrap", "departmentCtrlModule", "projectCtrlModule", 'ngMaterial', 'ngMessages'
-        , "loginCtrlModule", "clientCtrlModule", "uploadCtrlModule"]);
+        , "loginCtrlModule", "clientCtrlModule", "uploadCtrlModule", "logoutCtrlModule"]);
     app.run(function ($rootScope, $location, $http) {
         $rootScope.location = $location;
         $rootScope.$on('$stateChangeStart', (e, toState, toStateParams, toParams, fromState, fromParams) => {
@@ -23,7 +23,6 @@
                         if (v === role) {
                             isAuthorized = true;
                         }
-
                     });
                     if (isAuthorized === true) {
                         $http.defaults.headers.common.Authorization = 'Bearer ' + token;
@@ -47,15 +46,22 @@
                     controller: "HomeCtrl",
                     data: {
                         ensureAuthenticated: true,
-                        role: ['Admin', 'Team Leads']
+                        role: ['Admin', 'Team Leads', 'Employees']
                     }
-
                 })
                 .state('login', {
                     url: "/login",
                     templateUrl: "views/Login/login.html",
                     controller: "LoginCtrl"
                 })
+                .state('logout', {
+                    controller: "LogoutCtrl",
+                    data: {
+                        ensureAuthenticated: true,
+                        role: ['Admin', 'Team Leads', 'Employees']
+                    }
+                })
+
                 .state('employee', {
                     url: "/Employee",
                     templateUrl: "views/employeeCrud.html",
@@ -63,21 +69,19 @@
                         ensureAuthenticated: true,
                         role: ['Admin', 'Team Leads']
                     }
+
                 })
                 .state('employee.currentemployee', {
                     url: "/CurrentEmployee",
                     templateUrl: "views/currentEmployee.html",
-                    controller: "EmployeeCtrl",
-                    data: {
-                        ensureAuthenticated: true,
-                        role: ['Admin', 'Team Leads']
-                    }
-
-                })
+                    controller: "EmployeeCtrl"                })
                 .state('employee.pastemployee', {
                     url: "/PastEmployee",
                     templateUrl: "views/pastEmployee.html",
-                    controller: "NotWorkingEmployeeCtrl"
+                    controller: "NotWorkingEmployeeCtrl",
+                    data: {
+                        ensureAuthenticated: true
+                    }
                 })
                 .state('department', {
                     url: "/Department",
@@ -119,18 +123,22 @@
                     templateUrl: "views/clients/clientHome.html",
                     data: {
                         ensureAuthenticated: true,
-                        role: ['Admin', 'Team Leads']
+                        role: ['Team Leads']
                     }
                 })
                 .state('clients.list', {
                     url: "/ListClient",
                     templateUrl: "views/clients/clientList.html",
-                    controller: "clientCtrl"
+                    controller: "clientCtrl",
                 })
                 .state('clients.crud', {
                     url: "/SetClient",
                     templateUrl: "views/clients/clientCRUD.html",
-                    controller: "setClientCtrl"
+                    controller: "setClientCtrl",
+                    data: {
+                        ensureAuthenticated: true,
+                        role: ['Team Leads']
+                    }
                 })
                 .state('403', {
                     url: "/403",

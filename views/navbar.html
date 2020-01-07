@@ -1,28 +1,31 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
     <a class="navbar-brand" ui-sref="home">Employee Management System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" ui-sref="home">Home </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" ui-sref="employee">Employee</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" ui-sref="department">Department</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" ui-sref="project">Project</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" ui-sref="clients">Clients</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="home">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="employee">Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="department">Department</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="project">Project</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="clients">Clients</a>
+            </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-        </form>
+        <div class="md-col-1">
+            {{userName}}
+            <button class="btn btn-danger btn-block" ng-controller="LogoutCtrl" ng-click="logout()">Logout</button>
+        </div>
     </div>
 </nav>
