@@ -1,6 +1,6 @@
-angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
-    .controller("EmployeeCtrl", ["$scope", "currentEmployeeService", "$log", "projectService",
-        function ($scope, currentEmployeeService, $log, projectService) {
+angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','departmentService'])
+    .controller("EmployeeCtrl", ["$scope", "currentEmployeeService", "$log", "projectService","departService",
+        function ($scope, currentEmployeeService, $log, projectService,departService) {
             $scope.btnText = "Save";
             $scope.employeeId = 0;
             $scope.showModal = false;
@@ -89,6 +89,11 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
             $scope.btnAddNewEmployee = function () {
                 $scope.titleHeader = "Add Employee";
                 $scope.addNewEmployee = !$scope.addNewEmployee;
+                var pGet = departService.getDepartments();
+                pGet.then(function (pl) { $scope.departments = pl.data },
+                function (errorPl) {
+                    $log.error('failure loading department', errorPl);
+                });
                 $scope.insertEmployee = {};
                 $scope.insertEmployee.saveEmployeeData = function () {
                     var employees = {
@@ -111,6 +116,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                     addEmployees.then(function () {
                         alert("Data save Successfully");
                         loadRecords();
+                        $scope.addNewEmployee = false;
                     }, function (error) {
                         console.log("Error: " + error)
                     });
