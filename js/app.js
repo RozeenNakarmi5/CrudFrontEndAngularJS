@@ -2,7 +2,7 @@
     'use strict';
     var app = angular.module('employeeApp', ["LoginService", "ngRoute", "employeeCtrlModule", "popupModule", "homeCtrlModule", "ui.router"
         , "ngAnimate", "ui.bootstrap", "departmentCtrlModule", "projectCtrlModule", 'ngMaterial', 'ngMessages'
-        , "loginCtrlModule","clientCtrlModule","uploadCtrlModule"]);
+        , "loginCtrlModule", "clientCtrlModule", "uploadCtrlModule"]);
     app.run(function ($rootScope, $location, $http) {
         $rootScope.location = $location;
         $rootScope.$on('$stateChangeStart', (e, toState, toStateParams, toParams, fromState, fromParams) => {
@@ -36,8 +36,9 @@
             }
         });
     })
-    app.config(['$stateProvider', '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+    app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+        function ($stateProvider, $urlRouterProvider, $httpProvider) {
+            $httpProvider.interceptors.push('authInterceptor');
             $stateProvider
 
                 .state('home', {
@@ -60,12 +61,18 @@
                     templateUrl: "views/employeeCrud.html",
                     data: {
                         ensureAuthenticated: true,
+                        role: ['Admin', 'Team Leads']
                     }
                 })
                 .state('employee.currentemployee', {
                     url: "/CurrentEmployee",
                     templateUrl: "views/currentEmployee.html",
-                    controller: "EmployeeCtrl"
+                    controller: "EmployeeCtrl",
+                    data: {
+                        ensureAuthenticated: true,
+                        role: ['Admin', 'Team Leads']
+                    }
+
                 })
                 .state('employee.pastemployee', {
                     url: "/PastEmployee",
@@ -110,6 +117,10 @@
                 .state('clients', {
                     url: "/client",
                     templateUrl: "views/clients/clientHome.html",
+                    data: {
+                        ensureAuthenticated: true,
+                        role: ['Admin', 'Team Leads']
+                    }
                 })
                 .state('clients.list', {
                     url: "/ListClient",
@@ -121,11 +132,27 @@
                     templateUrl: "views/clients/clientCRUD.html",
                     controller: "setClientCtrl"
                 })
+                .state('403', {
+                    url: "/403",
+                    templateUrl: 'views/Forbidden/forbidden.html',
+                    data: {
+                        ensureAuthenticated: true
+                    }
+                })
 
             $urlRouterProvider.otherwise('/login');
-
         }
-
     ])
-
+    app.factory('authInterceptor', function ($q, $location) {
+        return {
+            responseError(response) {
+                if (response.status === 401 || response.status === 403) {
+                    $location.path('/403');
+                 
+                }
+                return $q.reject(response);
+            }
+        };
+    })
 })();
+
