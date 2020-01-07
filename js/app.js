@@ -23,7 +23,6 @@
                         if (v === role) {
                             isAuthorized = true;
                         }
-
                     });
                     if (isAuthorized === true) {
                         $http.defaults.headers.common.Authorization = 'Bearer ' + token;
@@ -46,31 +45,38 @@
                     controller: "HomeCtrl",
                     data: {
                         ensureAuthenticated: true,
-                        role: ['Admin', 'Team Leads']
+                        role: ['Admin', 'Team Leads','Employees']
                     }
-
                 })
                 .state('login', {
                     url: "/login",
                     templateUrl: "views/Login/login.html",
                     controller: "LoginCtrl"
                 })
+               
                 .state('employee', {
                     url: "/Employee",
                     templateUrl: "views/employeeCrud.html",
                     data: {
-                        ensureAuthenticated: true,
+                        ensureAuthenticated: false
                     }
+                    
                 })
                 .state('employee.currentemployee', {
                     url: "/CurrentEmployee",
                     templateUrl: "views/currentEmployee.html",
-                    controller: "EmployeeCtrl"
+                    controller: "EmployeeCtrl",
+                    data: {
+                        ensureAuthenticated: false
+                    }
                 })
                 .state('employee.pastemployee', {
                     url: "/PastEmployee",
                     templateUrl: "views/pastEmployee.html",
-                    controller: "NotWorkingEmployeeCtrl"
+                    controller: "NotWorkingEmployeeCtrl",
+                    data: {
+                        ensureAuthenticated: false
+                    }
                 })
                 .state('department', {
                     url: "/Department",
@@ -114,12 +120,20 @@
                 .state('clients.list', {
                     url: "/ListClient",
                     templateUrl: "views/clients/clientList.html",
-                    controller: "clientCtrl"
+                    controller: "clientCtrl",
+                    data: {
+                        ensureAuthenticated: true,
+
+                    }
                 })
                 .state('clients.crud', {
                     url: "/SetClient",
                     templateUrl: "views/clients/clientCRUD.html",
-                    controller: "setClientCtrl"
+                    controller: "setClientCtrl",
+                    data: {
+                        ensureAuthenticated: true,
+                        role: ['Team Leads']
+                    }
                 })
 
             $urlRouterProvider.otherwise('/login');

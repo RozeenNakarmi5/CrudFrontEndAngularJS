@@ -40,6 +40,18 @@ angular.module('employeeService', [])
     {
         return $http.put("http://localhost:8812/api/employee/updatecontact/" + empID, contactData)
     }
+    this.getEmpSchedule = function(pageNumber)
+    {
+        return $http.get(apiUrl+ "GetEmpSchedule?pageNumber=" + pageNumber)
+    }
+    this.countEmpSchedule = function()
+    {
+        return $http.get(apiUrl + "/CountEmpSchedule");
+    }
+    this.exportEmpSchedule = function()
+    {
+        return $http.post(apiUrl + "/ExportEmpSchedule")
+    }
     
 })
 .service ('pastEmployeeService', function($http)

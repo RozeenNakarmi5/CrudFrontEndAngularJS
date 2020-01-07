@@ -13,6 +13,10 @@ angular.module('LoginService', [])
           headers: {'Content-Type': 'application/json'}
         });
       };
+    this.logout  = function()
+    {
+      return $http.put(APIURL + "Logout")
+    }
     this.ensureAuthenticated = function(token) {
     return $http({
         method: 'GET',

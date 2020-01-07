@@ -9,6 +9,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
             $scope.editEmployee = false;
             $scope.assignProjectToEmployee = false;
             $scope.editContacts = false;
+            $scope.empScheduleModal = false;
 
             loadRecords();
 
@@ -19,9 +20,20 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                 },
 
                     function (errorPl) {
-                        $log.error('failed to load clients', errorPl);
+                        $log.error('failed to load Employee', errorPl);
                     }
                 )
+            }
+            function loadSchedule(pageNumber)
+            {
+                var scheGet = currentEmployeeService.getEmpSchedule(pageNumber);
+                scheGet.then(function (pl){
+                $scope.EmpSchedules = pl.data;
+                },
+                function(error)
+                {
+                    $log.error('failed to load Employee Schedule', error);
+                })
             }
 
             $scope.populateForm = function (empData) {
@@ -115,27 +127,27 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                         console.log("Error: " + error)
                     });
                 }
-
             }
-
             $scope.onDelete = function (employeeID) {
-                var deletedEmployee = currentEmployeeService.deleteEmployees(employeeID);
-                deletedEmployee.then(function (response) {
-                    if (response.data != "") {
-                        alert("Data Delete Successfully");
-                        loadRecords();
-                    }
-                    else {
-                        alert("Something wrong when adding Deleting employee ");
-
-                    }
-                }, function (error) {
-                    console.log("Error: " + error);
-                });
-
+                if (confirm('Are you sure you want to delete?'))
+                {
+                    var deletedEmployee = currentEmployeeService.deleteEmployees(employeeID);
+                    deletedEmployee.then(function (response) {
+                        if (response.data != "") {
+                            alert("Data Delete Successfully");
+                            loadRecords();
+                        }
+                        else {
+                            alert("Something wrong when adding Deleting employee ");
+    
+                        }
+                    }, function (error) {
+                        console.log("Error: " + error);
+                    });
+    
+                }
+                
             }
-
-
             $scope.onUpdateRole = function (empdID) {
                 $scope.updatingRoles = {};
                 $scope.titleHeader = "Add Roles";
@@ -202,6 +214,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
             $scope.currentPage = 0;
             $scope.pageSize = 5;
             currentEmployeeService.countEmployees().then(function (pl) { $scope.EmployeesCount = pl.data });
+            currentEmployeeService.countEmpSchedule().then(function (pl) { $scope.eSC = pl.data });
 
 
             $scope.numberOfPages = function () {
@@ -224,10 +237,53 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService'])
                     }
                 )
             }
+            
+
+            $scope.changeSchedule = function (a) {
+                $scope.countEmpSchedules = currentEmployeeService.countEmpSchedule();
+
+                $scope.numberofSchedulePage = function () {
+                    return Math.ceil($scope.eSC / 5);
+                }
+
+                $scope.currentPage = $scope.currentPage + a;
+
+                console.log($scope.currentPage);
+
+                // return loadRecords($scope.currentPage+1);
+                var pGet = currentEmployeeService.getEmpSchedule($scope.currentPage + 1);
+                pGet.then(function (pl) {
+                    $scope.EmpSchedules = pl.data;
+                },
+
+                    function (errorPl) {
+                        $log.error('failed to load clients', errorPl);
+                    }
+                )
+            }
             // $scope.previous = function(){
             //     $scope.currentPage=$scope.currentPage-1
             //     return loadRecords($scope.currentPage);
             // }
+            $scope.btnEmpSchedule = function ()
+            {
+                $scope.empScheduleModal = !$scope.empScheduleModal;
+                $scope.titleHeader = "Employee Schedule";
+                loadSchedule();
+                
+                $scope.export = function ()
+                {
+                    if (confirm('Are you sure you want to delete?'))
+                    {
+                        var exportData = currentEmployeeService.exportEmpSchedule();
+                        exportData.then(function () {
+                        alert("Export Scuess Full");
+                        });
+                    }
+                    
+                }
+            }
+            
 
         }])
 
