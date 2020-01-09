@@ -31,7 +31,8 @@ function ($scope,departService,$log)
                 $scope.addDepartment= false;
 
             },function(error){
-                console.log("Error: "+ error)
+                console.log("Error: "+ error);
+                $scope.addDepartment= false;
             });
         }
     }
@@ -80,7 +81,8 @@ function ($scope,departService,$log)
                 $scope.updateDepartment= false;
 
             },function(error){
-                console.log("Error: "+ error)
+                console.log("Error: "+ error);
+                $scope.updateDepartment= false;
             });
         }
 

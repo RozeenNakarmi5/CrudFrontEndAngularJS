@@ -30,11 +30,11 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                     addClient.then(function () {
                         alert("Data save Successfully");
                         loadRecords();
-                        $scope.addClientModal = !$scope.addClientModal;
+                        $scope.addClientModal = false;
                     },
                         function (error) {
                             alert("Error: " + error);
-                            $scope.addClientModal = !$scope.addClientModal;
+                            $scope.addClientModal = false;
                         });
                 }
 
@@ -58,18 +58,18 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                         clientOffice: $scope.edit.ClientOffice,
                         officeAddress: $scope.edit.ClientOAddress,
                         clientContactNumber: $scope.edit.ClientContactNumber
-
                     }
                     var updateClient = listClientService.updateClient(Client.clientID, Client);
                     updateClient.then(function () {
                         alert("Data updated Successfully");
                         loadRecords();
 
-                        $scope.editClientModal = !$scope.editClientModal;
+                        $scope.editClientModal = false;
 
                     },
                         function (error) {
                             alert("Error: " + error);
+                            $scope.editClientModal = false;
                         });
                 }
             }
@@ -86,7 +86,7 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                 deleteClient.then(function (response) {
                     if (response.data != "") {
                         alert("Data Delete Successfully");
-                        $scope.deleteClientModal = !$scope.deleteClientModal;
+                        $scope.deleteClientModal = false;
                         loadRecords();
                     }
                     else {
@@ -94,6 +94,7 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                     }
                 }, function (error) {
                     console.log("Error: " + error);
+                    $scope.deleteClientModal = false;
                 });
             }
             $scope.addProject = function (CID) {
@@ -117,6 +118,9 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                     updateProject.then(function () {
                         alert("Assigned Project");
                         loadRecords();
+                        $scope.assignProjectToClient = false;
+                    }, function (errorPl) {
+                        $log.error('failure loading Project', errorPl);
                         $scope.assignProjectToClient = false;
                     })
                 }
@@ -163,12 +167,12 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                     updateClient.then(function () {
                         alert("Data updated Successfully");
                         loadRecords();
-
-                        $scope.editClientModal = !$scope.editClientModal;
+                        $scope.editClientModal = false;
 
                     },
                         function (error) {
                             alert("Error: " + error);
+                            $scope.editClientModal = false;
                         });
                 }
             }
@@ -183,16 +187,15 @@ angular.module("clientCtrlModule", ['ClientService', 'ProjectService'])
                 deleteClient.then(function (response) {
                     if (response.data != "") {
                         alert("Data Delete Successfully");
-                        $scope.deleteClientModal = !$scope.deleteClientModal;
+                        $scope.deleteClientModal = false;
                         loadRecords();
-
-
                     }
                     else {
                         alert("Something wrong when adding Deleting client ");
                     }
                 }, function (error) {
                     console.log("Error: " + error);
+                    $scope.deleteClientModal = false;
                 });
             }
 

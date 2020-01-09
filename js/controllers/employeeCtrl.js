@@ -68,7 +68,8 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         $scope.editEmployee = false;
 
                     }, function (error) {
-                        console.log("Error: " + error)
+                        console.log("Error: " + error);
+                        $scope.editEmployee = false;
                     });
                 }
 
@@ -103,6 +104,9 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         loadRecords();
                         $scope.editContacts = false;
 
+                    }, function (error) {
+                        console.log("Error: " + error);
+                        $scope.editContacts = false;
                     });
                 }
             }

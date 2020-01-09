@@ -31,7 +31,6 @@ angular.module("projectCtrlModule", ['ProjectService'])
             }
 
             $scope.addNewProject = function () {
-
                 $scope.titleHeader = "Add Project";
                 $scope.addProjectModal = !$scope.addProjectModal;
                 $scope.insertProject = {};
@@ -52,11 +51,11 @@ angular.module("projectCtrlModule", ['ProjectService'])
                         alert("Data save Successfully");
                         loadRecords();
                         clear();
-                        $scope.addProjectModal = !$scope.addProjectModal;
+                        $scope.addProjectModal = false;
                     },
                         function (error) {
                             alert("Error: " + error);
-                            $scope.addProjectModal = !$scope.addProjectModal;
+                            $scope.addProjectModal = false;
                         });
                 }
             }
@@ -77,8 +76,8 @@ angular.module("projectCtrlModule", ['ProjectService'])
                         projectID: $scope.edit.projectID,
                         projectName: $scope.edit.projectName,
                         projectDescription: $scope.edit.projectDesc,
-                        projectStartDate: $scope.edit.projectSD,
-                        projectEndDate: $scope.edit.projectED,
+                        projectEndDate: $scope.edit.projectED.date,
+                        projectStartDate: $scope.edit.projectSD.date,
                         isActive: $scope.edit.projectSts
                     }
                     var addProject = projectService.updateProject(project.projectID, project);
@@ -86,7 +85,7 @@ angular.module("projectCtrlModule", ['ProjectService'])
                         alert("Data updated Successfully");
                         loadRecords();
                         clear();
-                        $scope.editProjectModal = !$scope.editProjectModal;
+                        $scope.editProjectModal = false;
 
                     },
                         function (error) {
@@ -95,8 +94,9 @@ angular.module("projectCtrlModule", ['ProjectService'])
                         });
                 }
             }
-            $scope.delete = {};
+            
             $scope.delete = function (projectID) {
+                $scope.delete = {};
                 $scope.titleHeader = "Delete?";
                 $scope.deleteProjectModal = !$scope.deleteProjectModal;
                 $scope.delete.PID = projectID;
@@ -107,7 +107,7 @@ angular.module("projectCtrlModule", ['ProjectService'])
                 deleteProject.then(function (response) {
                     if (response.data != "") {
                         alert("Data Delete Successfully");
-                        $scope.deleteProjectModal = !$scope.deleteProjectModal;
+                        $scope.deleteProjectModal = false;
                         loadRecords();
                         clear();
 
@@ -117,6 +117,7 @@ angular.module("projectCtrlModule", ['ProjectService'])
                     }
                 }, function (error) {
                     console.log("Error: " + error);
+                    $scope.deleteProjectModal = false;
                 });
             }
 
@@ -148,7 +149,7 @@ angular.module("projectCtrlModule", ['ProjectService'])
                 restoreProject.then(function (response) {
                     if (response.data != "") {
                         alert("Data restored Successfully");
-                        $scope.restoreProjectModal = !$scope.restoreProjectModal;
+                        $scope.restoreProjectModal = false;
                         loadRecords();
                     }
                     else {
