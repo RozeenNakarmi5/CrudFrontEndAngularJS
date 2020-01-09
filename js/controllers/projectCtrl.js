@@ -71,14 +71,15 @@ angular.module("projectCtrlModule", ['ProjectService'])
                 $scope.edit.projectDesc = proj.projectDescription;
                 $scope.edit.projectSD = date(proj.projectStartDate);
                 $scope.edit.projectED = date(proj.projectEndDate);
+                console.log($scope.edit.projectSD);
                 $scope.edit.projectSts = proj.isActive;
                 $scope.updateProject = function () {
                     var project = {
                         projectID: $scope.edit.projectID,
                         projectName: $scope.edit.projectName,
                         projectDescription: $scope.edit.projectDesc,
-                        projectStartDate: $scope.edit.projectSD,
-                        projectEndDate: $scope.edit.projectED,
+                        projectStartDate: $scope.edit.projectSD.date,
+                        projectEndDate: $scope.edit.projectED.date,
                         isActive: $scope.edit.projectSts
                     }
                     var addProject = projectService.updateProject(project.projectID, project);
