@@ -1,6 +1,6 @@
 angular.module("projectCtrlModule", ['ProjectService'])
     .controller("projectCtrl", ["$scope", "projectService", "$log",
-        function ($scope, projectService, $log) {
+        function ($scope, projectService, $log, $filter) {
             $scope.addProjectModal = false;
             loadRecords();
             clear();
@@ -21,6 +21,13 @@ angular.module("projectCtrlModule", ['ProjectService'])
                 $scope.projectStartDate = "";
                 $scope.projectEndDate = "";
                 $scope.isActive = "";
+            }
+
+            function date(date) {
+                var d = new Date(date);
+                var dateString = ("0" + (d.getMonth() + 1)).slice(-2) + "/" + ("0" + d.getDate()).slice(-2) + "/" + + d.getFullYear();
+                var ok = { date: new Date(dateString) };
+                return ok;
             }
 
             $scope.addNewProject = function () {
@@ -62,8 +69,8 @@ angular.module("projectCtrlModule", ['ProjectService'])
                 $scope.edit.projectID = proj.projectID;
                 $scope.edit.projectName = proj.projectName;
                 $scope.edit.projectDesc = proj.projectDescription;
-                $scope.edit.projectSD = proj.projectStartDate;
-                $scope.edit.projectED = proj.projectEndDate;
+                $scope.edit.projectSD = date(proj.projectStartDate);
+                $scope.edit.projectED = date(proj.projectEndDate);
                 $scope.edit.projectSts = proj.isActive;
                 $scope.updateProject = function () {
                     var project = {

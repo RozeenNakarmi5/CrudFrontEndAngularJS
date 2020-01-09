@@ -74,14 +74,13 @@
                 .state('employee.currentemployee', {
                     url: "/CurrentEmployee",
                     templateUrl: "views/currentEmployee.html",
-                    controller: "EmployeeCtrl"                })
+                    controller: "EmployeeCtrl",
+                    
+                })
                 .state('employee.pastemployee', {
                     url: "/PastEmployee",
                     templateUrl: "views/pastEmployee.html",
                     controller: "NotWorkingEmployeeCtrl",
-                    data: {
-                        ensureAuthenticated: true
-                    }
                 })
                 .state('department', {
                     url: "/Department",
@@ -123,7 +122,7 @@
                     templateUrl: "views/clients/clientHome.html",
                     data: {
                         ensureAuthenticated: true,
-                        role: ['Team Leads']
+                        role: ['Admin']
                     }
                 })
                 .state('clients.list', {
@@ -148,7 +147,7 @@
                     }
                 })
 
-            $urlRouterProvider.otherwise('/login');
+            $urlRouterProvider.otherwise('/');
         }
     ])
     app.factory('authInterceptor', function ($q, $location) {
