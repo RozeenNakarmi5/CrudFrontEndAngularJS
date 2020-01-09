@@ -12,10 +12,20 @@ angular.module("loginCtrlModule", ['LoginService'])
                 $state.go('home', null, { reload: true });
 
             }, function (error) {
-                alert("Invalid Username or password");
-                $scope.userName = "";
-                $scope.password = "";
-                console.log("Error: " + error)
+                if (error.status === 404)
+                {
+                    alert("Invalid Username or password");
+                    $scope.userName = "";
+                    $scope.password = "";
+                    console.log("Error: " + error)
+                }
+                else if (error.status === 400)
+                {
+                    alert("User alredy logged in");
+                    $scope.userName = "";
+                    $scope.password = "";
+                }
+                
             });
         }
     }])

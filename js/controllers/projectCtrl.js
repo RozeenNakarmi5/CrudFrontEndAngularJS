@@ -91,6 +91,7 @@ angular.module("projectCtrlModule", ['ProjectService'])
                     },
                         function (error) {
                             alert("Error: " + error);
+                            $scope.editProjectModal = false;
                         });
                 }
             }
@@ -155,6 +156,7 @@ angular.module("projectCtrlModule", ['ProjectService'])
                     }
                 }, function (error) {
                     console.log("Error: " + error);
+                    $scope.restoreProjectModal = false;
                 });
             }
         }])
