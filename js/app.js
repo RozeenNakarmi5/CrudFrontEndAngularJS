@@ -122,7 +122,7 @@
                     templateUrl: "views/clients/clientHome.html",
                     data: {
                         ensureAuthenticated: true,
-                        role: ['Admin']
+                        role: ['Admin', 'Team Leads']
                     }
                 })
                 .state('clients.list', {
@@ -133,11 +133,7 @@
                 .state('clients.crud', {
                     url: "/SetClient",
                     templateUrl: "views/clients/clientCRUD.html",
-                    controller: "setClientCtrl",
-                    data: {
-                        ensureAuthenticated: true,
-                        role: ['Team Leads']
-                    }
+                    controller: "setClientCtrl"
                 })
                 .state('403', {
                     url: "/403",
