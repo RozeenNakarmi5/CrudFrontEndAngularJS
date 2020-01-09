@@ -1,21 +1,9 @@
-angular.module("homeCtrlModule", ['employeeService', 'ProjectService', 'LoginService', 'ClientService', 'angularUtils.directives.dirPagination'])
-    .controller("HomeCtrl", ["$scope", "currentEmployeeService", "projectService", "listClientService", "$log", "loginServ",
-        function ($scope, currentEmployeeService, projectService, listClientService, $log, loginServ) {
+angular.module("homeCtrlModule", ['employeeService', 'ProjectService', 'ClientService', 'angularUtils.directives.dirPagination'])
+    .controller("HomeCtrl", ["$scope", "currentEmployeeService", "projectService", "listClientService", "$log",
+        function ($scope, currentEmployeeService, projectService, listClientService, $log) {
             countEmployees();
             countProjects();
             countClients();
-            $scope.isLoggedIn = false;
-            const token = localStorage.getItem('token');
-            if (token) {
-                loginServ.ensureAuthenticated(token)
-                    .then((user) => {
-                        if (user.data.status === 'success');
-                        $scope.isLoggedIn = true;
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
             function countEmployees() {
                 var promiseGet = currentEmployeeService.countEmployees();
                 promiseGet.then(function (pl) { $scope.EmployeesCount = pl.data },
