@@ -134,9 +134,20 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                     }
                     var addEmployees = currentEmployeeService.postEmployees(employees);
                     addEmployees.then(function () {
-                        alert("Data save Successfully");
-                        loadRecords();
-                        $scope.addNewEmployee = false;
+                        if($scope.insertEmployee.firstName === undefined && $scope.insertEmployee.lastName === undefined && $scope.insertEmployee.address===undefined
+                            && $scope.insertEmployee.email === undefined && $scope.insertEmployee.contactNumber === undefined && $scope.insertEmployee.emergencyContactNumber===undefined
+                            &&  $scope.insertEmployee.imageSrc === undefined && $scope.insertEmployee.designation === undefined && $scope.insertEmployee.salary === undefined && $scope.insertEmployee.isFullTimer=== undefined
+                            && $scope.insertEmployee.userName === undefined && $scope.insertEmployee.password === undefined && $scope.insertEmployee.roleID === undefined
+                            && $scope.insertEmployee.departmentID === undefined)
+                        {
+                            alert("Please dont leave the field blank");
+                        }
+                        else
+                        {
+                            alert("Data save Successfully");
+                            loadRecords();
+                            $scope.addNewEmployee = false;
+                        }
                     }, function (error) {
                         $scope.addNewEmployee = false;
                         console.log("Error: " + error)
