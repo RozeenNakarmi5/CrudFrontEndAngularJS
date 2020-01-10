@@ -4,7 +4,7 @@
             employee</button>
     </div>
     <div class="col-md-6 mx-auto">
-        <button class="btn btn-success" ng-click="btnEmpSchedule()"> <i ></i>Employee Schedule</button>
+        <button class="btn btn-success" ng-click="btnEmpSchedule()"> <i></i>Employee Schedule</button>
     </div>
     <div class="col-md-2">
         <form class="form-inline">
@@ -22,7 +22,7 @@
     <div ui-grid="gridOptions" ui-grid-pagination></div>
 </div> -->
 
-<div class="col-md-12" style="float: center; text-align: center;">
+<div class="col-md-12" style="text-align: center;">
     <table class="table table-hover">
         <tr class="table text-center">
             <th>Employee ID</th>
@@ -99,7 +99,8 @@
             </div>
             <!-- <input type="text" name="updatingRoles.roleID" ng-model="updatingRoles.roleID" class="form-control"
                 placeholder="Role ID" required> -->
-            <md-select class="form-control" placeholder="Select Role" name="updatingRoles.roleID" ng-model="updatingRoles.roleID" > 
+            <md-select class="form-control" placeholder="Select Role" name="updatingRoles.roleID"
+                ng-model="updatingRoles.roleID">
                 <md-option ng-value="1">Admin</md-option>
                 <md-option ng-value="2">Team Leads</md-option>
                 <md-option ng-value="3">Employees</md-option>
@@ -121,8 +122,9 @@
             </div>
             <!-- <input type="text" name="updatingDepartment.departmentID" ng-model="updatingDepartment.departmentID"
                 class="form-control" placeholder="Department ID" required> -->
-            <md-select class="form-control" ng-model="updatingDepartment.departmentID" placeholder="Select Department"> 
-                <md-option ng-value="dept.departmentID" ng-repeat="dept in departments" >{{dept.departmentName}}</md-option>
+            <md-select class="form-control" ng-model="updatingDepartment.departmentID" placeholder="Select Department">
+                <md-option ng-value="dept.departmentID" ng-repeat="dept in departments">{{dept.departmentName}}
+                </md-option>
             </md-select>
         </div>
     </div>
@@ -262,7 +264,8 @@
                         </div>
                         <!-- <input type="text" name="insertEmployee.isFullTimer" ng-model="insertEmployee.isFullTimer"
                             class="form-control" placeholder="Full Timer" required> -->
-                        <md-select placeholder="Full Timer" name="insertEmployee.isFullTimer" ng-model="insertEmployee.isFullTimer" class="form-control"> 
+                        <md-select placeholder="Full Timer" name="insertEmployee.isFullTimer"
+                            ng-model="insertEmployee.isFullTimer" class="form-control">
                             <md-option ng-value="true">True</md-option>
                             <md-option ng-value="false">False</md-option>
                         </md-select>
@@ -301,7 +304,8 @@
                         </div>
                         <!-- <input type="text" name="insertEmployee.roleID" ng-model="insertEmployee.roleID"
                             class="form-control" placeholder="roleID" required> -->
-                        <md-select class="form-control" placeholder="Select Role" name="insertEmployee.roleID" ng-model="insertEmployee.roleID" > 
+                        <md-select class="form-control" placeholder="Select Role" name="insertEmployee.roleID"
+                            ng-model="insertEmployee.roleID">
                             <md-option ng-value="1">Admin</md-option>
                             <md-option ng-value="2">Team Leads</md-option>
                             <md-option ng-value="3">Employees</md-option>
@@ -318,8 +322,10 @@
                         </div>
                         <!-- <input type="text" name="insertEmployee.departmentID" ng-model="insertEmployee.departmentID"
                             class="form-control" placeholder="departmentID" required> -->
-                        <md-select class="form-control" ng-model="insertEmployee.departmentID" placeholder="Select Department"> 
-                            <md-option ng-value="dept.departmentID" ng-repeat="dept in departments" >{{dept.departmentName}}</md-option>
+                        <md-select class="form-control" ng-model="insertEmployee.departmentID"
+                            placeholder="Select Department">
+                            <md-option ng-value="dept.departmentID" ng-repeat="dept in departments">
+                                {{dept.departmentName}}</md-option>
                         </md-select>
                     </div>
                 </div>
@@ -387,19 +393,20 @@
                 class="fas fa-database"></i> {{btnText}}</button>
     </div>
 </modal>
-<modal visible ="assignProjectToEmployee">
+<modal visible="assignProjectToEmployee">
     <div class="form-group">
         <md-input-container>
             <label>Select Projects</label>
-            <md-select ng-model="assignProject.asdf" multiple> 
+            <md-select ng-model="assignProject.asdf" multiple>
                 <md-optgroup>
-                  <md-option ng-value="proj.projectID" ng-repeat="proj in project" >{{proj.projectName}}</md-option>
+                    <md-option ng-value="proj.projectID" ng-repeat="proj in project">{{proj.projectName}}</md-option>
                 </md-optgroup>
             </md-select>
         </md-input-container>
     </div>
     <div class="form-group">
-        <button class="btn btn-success btn-lg btn-block" ng-click="assignProject.onAddProject()" ng-if="!form"><i class="fas fa-database"></i> {{btnText}}</button>
+        <button class="btn btn-success btn-lg btn-block" ng-click="assignProject.onAddProject()" ng-if="!form"><i
+                class="fas fa-database"></i> {{btnText}}</button>
     </div>
 </modal>
 
@@ -520,28 +527,29 @@
     </div>
 </modal>
 <div>
-        <modal visible="empScheduleModal">
-            <button class="btn btn-secondary" ng-click="export()">Export</button>
-            <br />
-            <br />
-            <table>
-                <table class="table table-hover">
-                    <tr class="table text-center">
-                        <th>Employee ID</th>
-                        <th>Employee First Name</th>
-                        <th>Employee Last Name</th>
-                        <th>In Time</th>
-                        <th>Out Time</th>
-                        <th>Total Work Per Day</th>
-                    </tr>
-                    <tr dir-paginate="empS in EmpSchedules | itemsPerPage: 5">
-                        <td>{{empS.employeeID}}</td>
-                        <td>{{empS.employeeFirstName}}</td>
-                        <td>{{empS.employeeLastName}}</td>
-                        <td>{{empS.inTime}}</td>
-                        <td>{{empS.outTime}}</td>
-                        <td>{{empS.totalHourWorkPerday}}</td>
-                    </tr >
+    <modal visible="empScheduleModal">
+        <button class="btn btn-secondary" ng-click="export()">Export</button>
+        <br />
+        <br />
+        <div class="col-md-12" style="text-align: center;">
+            <table class="table table-hover">
+                <tr class="table text-center">
+                    <th>Employee ID</th>
+                    <th>Employee First Name</th>
+                    <th>Employee Last Name</th>
+                    <th>In Time</th>
+                    <th>Out Time</th>
+                    <th>Total Work Per Day</th>
+                </tr>
+                <tr dir-paginate="empS in EmpSchedules | itemsPerPage: 5">
+                    <td>{{empS.employeeID}}</td>
+                    <td>{{empS.employeeFirstName}}</td>
+                    <td>{{empS.employeeLastName}}</td>
+                    <td>{{empS.inTime}}</td>
+                    <td>{{empS.outTime}}</td>
+                    <td>{{empS.totalHourWorkPerday}}</td>
+                </tr>
+                
             </table>
             <div>
                 <button ng-disabled="sCurrentPage == 0" ng-click="changeSchedule(-1)">
@@ -552,14 +560,18 @@
                     Next {{eSC}}
                 </button>
             </div>
-        </modal>
-  
-    
-    
+        </div>
+
+
+    </modal>
+
+
+
 </div>
 
 <style>
-    .md-select-menu-container, md-backdrop {
+    .md-select-menu-container,
+    md-backdrop {
         z-index: 9999 !important;
     }
 </style>

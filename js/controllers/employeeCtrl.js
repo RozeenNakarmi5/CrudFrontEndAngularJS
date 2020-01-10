@@ -1,6 +1,6 @@
-angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','departmentService'])
-    .controller("EmployeeCtrl", ["$scope", "currentEmployeeService", "$log", "projectService","departService",
-        function ($scope, currentEmployeeService, $log, projectService,departService) {
+angular.module("employeeCtrlModule", ['employeeService', 'ProjectService', 'departmentService'])
+    .controller("EmployeeCtrl", ["$scope", "currentEmployeeService", "$log", "projectService", "departService",
+        function ($scope, currentEmployeeService, $log, projectService, departService) {
             $scope.btnText = "Save";
             $scope.employeeId = 0;
             $scope.showModal = false;
@@ -13,13 +13,12 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
 
             loadRecords();
             loadDepartments();
-            function loadDepartments()
-            {
+            function loadDepartments() {
                 var pGet = departService.getDepartments();
                 pGet.then(function (pl) { $scope.departments = pl.data },
-                function (errorPl) {
-                    $log.error('failure loading department', errorPl);
-                });
+                    function (errorPl) {
+                        $log.error('failure loading department', errorPl);
+                    });
             }
             function loadRecords(pageNumber) {
                 var pGet = currentEmployeeService.getEmployees(pageNumber);
@@ -32,16 +31,14 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                     }
                 )
             }
-            function loadSchedule(pageNumber)
-            {
+            function loadSchedule(pageNumber) {
                 var scheGet = currentEmployeeService.getEmpSchedule(pageNumber);
-                scheGet.then(function (pl){
-                $scope.EmpSchedules = pl.data;
+                scheGet.then(function (pl) {
+                    $scope.EmpSchedules = pl.data;
                 },
-                function(error)
-                {
-                    $log.error('failed to load Employee Schedule', error);
-                })
+                    function (error) {
+                        $log.error('failed to load Employee Schedule', error);
+                    })
             }
 
             $scope.populateForm = function (empData) {
@@ -113,7 +110,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
             $scope.btnAddNewEmployee = function () {
                 $scope.titleHeader = "Add Employee";
                 $scope.addNewEmployee = !$scope.addNewEmployee;
-              
+
                 $scope.insertEmployee = {};
                 $scope.insertEmployee.saveEmployeeData = function () {
                     var employees = {
@@ -134,16 +131,14 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                     }
                     var addEmployees = currentEmployeeService.postEmployees(employees);
                     addEmployees.then(function () {
-                        if($scope.insertEmployee.firstName === undefined && $scope.insertEmployee.lastName === undefined && $scope.insertEmployee.address===undefined
-                            && $scope.insertEmployee.email === undefined && $scope.insertEmployee.contactNumber === undefined && $scope.insertEmployee.emergencyContactNumber===undefined
-                            &&  $scope.insertEmployee.imageSrc === undefined && $scope.insertEmployee.designation === undefined && $scope.insertEmployee.salary === undefined && $scope.insertEmployee.isFullTimer=== undefined
+                        if ($scope.insertEmployee.firstName === undefined && $scope.insertEmployee.lastName === undefined && $scope.insertEmployee.address === undefined
+                            && $scope.insertEmployee.email === undefined && $scope.insertEmployee.contactNumber === undefined && $scope.insertEmployee.emergencyContactNumber === undefined
+                            && $scope.insertEmployee.imageSrc === undefined && $scope.insertEmployee.designation === undefined && $scope.insertEmployee.salary === undefined && $scope.insertEmployee.isFullTimer === undefined
                             && $scope.insertEmployee.userName === undefined && $scope.insertEmployee.password === undefined && $scope.insertEmployee.roleID === undefined
-                            && $scope.insertEmployee.departmentID === undefined)
-                        {
+                            && $scope.insertEmployee.departmentID === undefined) {
                             alert("Please dont leave the field blank");
                         }
-                        else
-                        {
+                        else {
                             alert("Data save Successfully");
                             loadRecords();
                             $scope.addNewEmployee = false;
@@ -155,8 +150,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                 }
             }
             $scope.onDelete = function (employeeID) {
-                if (confirm('Are you sure you want to delete?'))
-                {
+                if (confirm('Are you sure you want to delete?')) {
                     var deletedEmployee = currentEmployeeService.deleteEmployees(employeeID);
                     deletedEmployee.then(function (response) {
                         if (response.data != "") {
@@ -165,14 +159,14 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         }
                         else {
                             alert("Something wrong when adding Deleting employee ");
-    
+
                         }
                     }, function (error) {
                         console.log("Error: " + error);
                     });
-    
+
                 }
-                
+
             }
             $scope.onUpdateRole = function (empdID) {
                 $scope.updatingRoles = {};
@@ -189,38 +183,34 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         alert("Updated role successfully");
                         loadRecords();
                         $scope.showModal = false;
-                    }, function(error)
-                    {
+                    }, function (error) {
                         console.log("Error: " + error);
                         $scope.showModal = false;
 
                     });
                 }
             }
-            $scope.addProject = function(empID)
-            {
+            $scope.addProject = function (empID) {
                 $scope.assignProjectToEmployee = !$scope.assignProjectToEmployee;
                 $scope.titleHeader = "AddProject";
                 $scope.assignProject = {};
                 $scope.assignProject.asdf = [];
                 var pGet = projectService.getProject();
                 pGet.then(function (pl) { $scope.project = pl.data },
-                function (errorPl) {
-                    $log.error('failure loading Project', errorPl);
-                });
-                $scope.assignProject.onAddProject = function()
-                {
+                    function (errorPl) {
+                        $log.error('failure loading Project', errorPl);
+                    });
+                $scope.assignProject.onAddProject = function () {
                     var updateEmployeeProject = {
-                        employeeID : empID,
-                        projectID : $scope.assignProject.asdf
+                        employeeID: empID,
+                        projectID: $scope.assignProject.asdf
                     }
                     var updateProject = currentEmployeeService.assignProject(updateEmployeeProject);
-                    updateProject.then(function(){
+                    updateProject.then(function () {
                         alert("Assigned Project");
-                        loadRecords ();
+                        loadRecords();
                         $scope.assignProjectToEmployee = false;
-                    }, function(error)
-                    {
+                    }, function (error) {
                         console.log("Error: " + error);
                         $scope.assignProjectToEmployee = false;
 
@@ -242,8 +232,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                         alert("Updated department successfully");
                         loadRecords();
                         $scope.addDepartmentModal = false;
-                    }, function(error)
-                    {
+                    }, function (error) {
                         console.log("Error: " + error);
                         $scope.addDepartmentModal = false;
                     });
@@ -261,9 +250,13 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
             $scope.numberOfPages = function () {
                 return Math.ceil($scope.EmployeesCount / 5);
             }
+            $scope.numberofSchedulePage = function () {
+                return Math.ceil($scope.eSC / 5);
+            }
+
 
             $scope.change = function (a) {
-                
+
                 $scope.currentPage = $scope.currentPage + a;
 
                 console.log($scope.currentPage);
@@ -275,18 +268,13 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
                 },
 
                     function (errorPl) {
-                        $log.error('failed to load clients', errorPl);
+                        $log.error('failed to load employees', errorPl);
                     }
                 )
             }
-            
 
             $scope.changeSchedule = function (a) {
                 $scope.countEmpSchedules = currentEmployeeService.countEmpSchedule();
-
-                $scope.numberofSchedulePage = function () {
-                    return Math.ceil($scope.eSC / 5);
-                }
 
                 $scope.sCurrentPage = $scope.sCurrentPage + a;
 
@@ -307,25 +295,22 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService','depar
             //     $scope.currentPage=$scope.currentPage-1
             //     return loadRecords($scope.currentPage);
             // }
-            $scope.btnEmpSchedule = function ()
-            {
+            $scope.btnEmpSchedule = function () {
                 $scope.empScheduleModal = !$scope.empScheduleModal;
                 $scope.titleHeader = "Employee Schedule";
                 loadSchedule();
-                
-                $scope.export = function ()
-                {
-                    if (confirm('Are you sure you want to delete?'))
-                    {
+
+                $scope.export = function () {
+                    if (confirm('Are you sure you want to export?')) {
                         var exportData = currentEmployeeService.exportEmpSchedule();
                         exportData.then(function () {
-                        alert("Export Scuess Full");
+                            alert("Export Success Full");
                         });
                     }
-                    
+
                 }
             }
-            
+
 
         }])
 
