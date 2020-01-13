@@ -4,6 +4,7 @@ angular.module("homeCtrlModule", ['employeeService', 'ProjectService', 'ClientSe
             countEmployees();
             countProjects();
             countClients();
+            GetWorkTime();
             function countEmployees() {
                 var promiseGet = currentEmployeeService.countEmployees();
                 promiseGet.then(function (pl) { $scope.EmployeesCount = pl.data },
@@ -27,6 +28,15 @@ angular.module("homeCtrlModule", ['employeeService', 'ProjectService', 'ClientSe
                         $log.error('failure loading Project', errorPl);
                     });
             }
+
+            function GetWorkTime(){
+                var promiseGet = currentEmployeeService.getWorkTime();
+                promiseGet.then(function (pl) { $scope.EmployeeSch = pl.data },
+                    function (errorPl) {
+                        $log.error('failure loading WorkTime', errorPl);
+                    });
+            }
+            
 
 
         }])
