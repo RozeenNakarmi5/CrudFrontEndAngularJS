@@ -4,7 +4,6 @@ angular.module('employeeService', [])
     var apiUrl = "http://localhost:8812/api/employee/";
     this.getEmployees = function(pageNumber)
     {
-        
         return $http.get(apiUrl + "?pageNumber=" + pageNumber);
     }
     this.countEmployees = function()
@@ -51,6 +50,18 @@ angular.module('employeeService', [])
     this.exportEmpSchedule = function()
     {
         return $http.post(apiUrl + "/ExportEmpSchedule")
+    }
+    this.employeeProject = function(pageNumber)
+    {
+        return $http.get(apiUrl + "/EmpProject?pageNumber=" + pageNumber);
+    }
+    this.countEmpPrj = function()
+    {
+        return $http.get(apiUrl + "/CountEmpPrj");
+    }
+    this.deleteProject = function(empProjectID)
+    {
+        return $http.delete(apiUrl + "/DeleteProject/" + empProjectID)
     }
     
 })

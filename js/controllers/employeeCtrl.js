@@ -367,3 +367,58 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService', 'depa
             }
         }])
 
+        .controller("EmployeeProject",["$scope","currentEmployeeService", function($scope,currentEmployeeService){
+            loadRecords();
+            function loadRecords() {
+                var pGet = currentEmployeeService.employeeProject();
+                pGet.then(function (pl) {
+                    $scope.EmployeesProject = pl.data;
+                },
+                    function (errorPl) {
+                        $log.error('failed to load Employee', errorPl);
+                    }
+                )
+            }
+
+            $scope.currentPage = 0;
+            $scope.pageSize = 5;
+            currentEmployeeService.countEmpPrj().then(function (pl) { $scope.EmployeesPrjCount = pl.data });
+
+            $scope.numberOfPages = function () {
+                return Math.ceil($scope.EmployeesPrjCount / 5);
+            }
+
+            $scope.change = function (a) {
+                $scope.currentPage = $scope.currentPage + a;
+
+                // return loadRecords($scope.currentPage+1);
+                var pGet = currentEmployeeService.employeeProject($scope.currentPage + 1);
+                pGet.then(function (pl) {
+                    $scope.EmployeesProject = pl.data;
+                },
+
+                    function (errorPl) {
+                        $log.error('failed to load employees', errorPl);
+                    }
+                )
+            }
+            $scope.onDeleteProject = function (employeeID) {
+                if (confirm('Are you sure you want to delete?')) {
+                    var deletedEmployee = currentEmployeeService.deleteProject(employeeID);
+                    deletedEmployee.then(function (response) {
+                        if (response.data != "") {
+                            alert("Data Delete Successfully");
+                            loadRecords();
+                        }
+                        else {
+                            alert("Something wrong when adding Deleting employee Project");
+                        }
+                    }, function (error) {
+                        console.log("Error: " + error);
+                    });
+
+                }
+
+            }
+        }])
+

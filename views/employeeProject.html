@@ -1,0 +1,42 @@
+<div class="col-md-12" style="text-align: center;">
+    <table class="table table-hover">
+        <tr class="table text-center">
+            <th>ID</td>
+            <th>Employee ID</th>
+            <th>Employee First Name</th>
+            <th>Employee Last Name</th>
+            <th>Employee Designation</th>
+            <th>Project</th>
+            <th>Actions</th>
+        </tr>
+
+        <!-- <tr ng-repeat="emp in Employees| filter:search | startFrom: currentPage*5"> -->
+        <tr dir-paginate="emp in EmployeesProject | itemsPerPage: 5">
+            <td>{{emp.employeeProjectID}}</td>
+            <td ng-click="populateForm(emp)">{{emp.employeeID}}</td>
+            <td ng-click="populateForm(emp)">{{emp.firstName}}</td>
+            <td ng-click="populateForm(emp)">{{emp.lastName}}</td>
+            <td ng-click="populateForm(emp)">{{emp.designation}}</td>
+            <td>{{emp.projectNames}}</td>
+            <td>
+                <table class="table table-borderless">
+                    <tr>
+                        <td>
+                            <i class="far fa-trash-alt fa-lg text-danger" ng-click="onDeleteProject(emp.employeeProjectID)"></i>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div>
+        <button ng-disabled="currentPage == 0" ng-click="change(-1)">
+            Previous
+        </button>
+        {{currentPage+1}}/{{numberOfPages()}}
+        <button ng-disabled="currentPage >= ((EmployeesPrjCount)/5) -1 " ng-click="change(1)">
+            Next {{EmployeesPrjCount}}
+        </button>
+    </div>
+    <hr>
+</div>

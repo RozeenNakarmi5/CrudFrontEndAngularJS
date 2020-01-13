@@ -82,6 +82,11 @@
                     templateUrl: "views/pastEmployee.html",
                     controller: "NotWorkingEmployeeCtrl",
                 })
+                .state('employee.employeeProject',{
+                    url: "/EmployeeProject",
+                    templateUrl: "views/employeeProject.html",
+                    controller: "EmployeeProject"
+                })
                 .state('department', {
                     url: "/Department",
                     templateUrl: "views/department.html",
