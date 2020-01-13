@@ -367,7 +367,7 @@ angular.module("employeeCtrlModule", ['employeeService', 'ProjectService', 'depa
             }
         }])
 
-        .controller("EmployeeProject",["$scope","currentEmployeeService", function($scope,currentEmployeeService){
+        .controller("EmployeeProject",["$scope","currentEmployeeService","$log", function($scope,currentEmployeeService,$log){
             loadRecords();
             function loadRecords() {
                 var pGet = currentEmployeeService.employeeProject();
